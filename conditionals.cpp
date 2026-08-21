@@ -1,18 +1,19 @@
 #include<iostream>
-int main ()
-{
- int x;
- int y;
- std::cout << "Enter the value of x";
- std::cin >> x;
- std::cout << "Enter the value of y";
- std::cin >> y;
- if  (x > y) {
-std::cout << x << " is greater than" << y; }
+using namespace std;
+int main () {
+
+int x;
+int y;
+cout << "Enter the value of x";
+cin >> x;
+cout << "Enter the value of y";
+cin >> y;
+if  (x > y) {
+cout << x << " is greater than" << y; }
 else if ( y > x) {
-    std::cout<< y << " is greater than" << x; }
- else {
-    std::cout << x << " and " << y << " are equal ";
+cout<< y << " is greater than" << x; }
+else {
+cout << x << " and " << y << " are equal ";
  }   
-    return 0;
+   return 0;
 }
