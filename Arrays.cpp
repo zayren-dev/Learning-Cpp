@@ -9,7 +9,7 @@ int main() {
 
     // An array stores multiple values of the same data type
     // Here, we are creating an array that can store 5 integers
-    int marks[5] = {85, 72, 90, 68, 95};
+    int marks[5] = {85, 72, 90, 68, 95, 67};
 
     // We can access each value using its index
     // IMPORTANT: Array indexing starts from 0, not 1
