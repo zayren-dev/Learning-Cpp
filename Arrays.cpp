@@ -19,6 +19,7 @@ int main() {
     cout << "Third mark: " << marks[2] << endl;
     cout << "Fourth mark: " << marks[3] << endl;
     cout << "Fifth mark: " << marks[4] << endl;
+    cout << "Sicth mark: " << marks[5] << endl;
 
     return 0;
 }
