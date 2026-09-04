@@ -27,7 +27,7 @@ int main() {
 
     // \r moves the cursor back to the beginning of the line
     // The text after \r can overwrite the text already printed
-    cout << "1234EFGH\r5678";
+    cout << "1234EFGH\r56";
 
     // endl also moves to a new line but it requires the stream insertion operator
     cout << "This is line one." << endl;
