@@ -14,7 +14,7 @@ int main() {
     cout << "Age:\t20\n";
 
     // \" allows us to print double quotes
-    cout << "He said, \"Hello!\"\n";
+    cout << "He said, \"Hello everyone!\"\n";
 
     // \' allows us to print a single quote
     cout << " \' It's a C++ program. \'\n";
