@@ -7,7 +7,7 @@ int main() {
     cout << "Hello\nWorld";
 
     cout << "\n\n"; // Two new lines
-    cout << "I am Zayn ";
+    cout << "I am Zayren ";
 
     // \t adds a tab space
     cout << "Name:\tZayn\n";
