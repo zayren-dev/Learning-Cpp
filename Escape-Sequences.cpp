@@ -23,7 +23,7 @@ int main() {
     cout << "This is a backslash: \\\n";
 
     // \b moves the cursor one position back
-    cout << "Hello\b\n";
+    cout << "Hello guys\b\n";
 
     // \r moves the cursor back to the beginning of the line
     // The text after \r can overwrite the text already printed
