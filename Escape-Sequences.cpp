@@ -32,6 +32,7 @@ int main() {
     // endl also moves to a new line but it requires the stream insertion operator
     cout << "This is line one." << endl;
     cout << "This is line two." << endl;
+    cout << "This is line three." << endl;
 
 
     return 0;
