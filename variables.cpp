@@ -10,7 +10,7 @@ int main()
 
     // here we assigned the value 6 to the variable radius
     
-    radius = 6; 
+    radius = 7; 
 
    // here we declared a variable called pie of type float and assigned the value 3.14 to it
   
