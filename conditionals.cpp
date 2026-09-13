@@ -2,18 +2,18 @@
 using namespace std;
 int main () {
 
-int x;
+int z;
 int y;
-cout << "Enter the value of x";
-cin >> x;
+cout << "Enter the value of z";
+cin >> z;
 cout << "Enter the value of y";
 cin >> y;
-if  (x > y) {
-cout << x << " is greater than" << y; }
-else if ( y > x) {
-cout<< y << " is greater than" << x; }
+if  (z > y) {
+cout << z << " is greater than" << y; }
+else if ( y > z) {
+cout<< y << " is greater than" << z; }
 else {
-cout << x << " and " << y << " are equal ";
+cout << z << " and " << y << " are equal ";
  }   
    return 0;
 }
