@@ -5,7 +5,7 @@ int main()
 {
     int rows;
 
-    // Ask the user how many rows they want
+    
     cout << "Enter the number of rows: ";
     cin >> rows;
 
@@ -18,7 +18,7 @@ int main()
             cout << "*";
         }
 
-        // Move to the next line after printing one row
+        
         cout << endl;
     }
 
