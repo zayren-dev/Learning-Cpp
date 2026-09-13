@@ -4,7 +4,7 @@ using namespace std;
 // A function is a block of code that does a specific task
 void greet()
 {
-    cout << "Hello! Welcome to C++." <<"\n";
+    cout << "Hello! Welcome to Learning C++." <<"\n";
 }
 
 int add(int a, int b)
