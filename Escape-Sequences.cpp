@@ -10,7 +10,7 @@ int main() {
     cout << "I am Zayren ";
 
     // \t adds a tab space
-    cout << "Name:\tZayn\n";
+    cout << "Name:\tZayren\n";
     cout << "Age:\t20\n";
 
     // \" allows us to print double quotes
