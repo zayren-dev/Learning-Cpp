@@ -6,7 +6,7 @@ int main()
     int rows;
 
     
-    cout << "Enter the number of rows: ";
+    cout << "Enter the total number of rows: ";
     cin >> rows;
 
     // Outer loop controls the rows
