@@ -1,5 +1,5 @@
 /* This is a simple C++ program that demonstrates how to perform if-else work without actually
-using ifs , logical and relational */
+using ifs , logical and  */
 #include<iostream>
 using namespace std;
 int main()
