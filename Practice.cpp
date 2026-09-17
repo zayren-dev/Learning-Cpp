@@ -1,10 +1,10 @@
 /* This is a simple C++ program that demonstrates how to perform if-else work without actually
-using ifs , logica */
+using ifs , logical and relational operators. */
 #include<iostream>
 using namespace std;
 int main()
 {
-  int fee = 1599839;
+  int fee = 150001;
   int a = fee/(150001);
 
   int cond = (2*a)/(a+1);
