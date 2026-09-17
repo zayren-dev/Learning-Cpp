@@ -4,7 +4,7 @@ using ifs , logical and relational operators. */
 using namespace std;
 int main()
 {
-  int fee = 150001;
+  int fee = 1599839;
   int a = fee/(150001);
 
   int cond = (2*a)/(a+1);
