@@ -32,7 +32,7 @@ int main()
     cout << "Sum: " << sum << endl;
 
     // In EXPLICIT CASTING we tell C++ to convert the value ourselves
-    double marks = 85.75;
+    double marks = 95.75;
     int wholeMarks = (int)marks;
 
     cout << "\nExplicit casting:" << endl;
