@@ -16,7 +16,6 @@ int main()
     cout << "Passed: " << passed << endl;
 
     // IMPLICIT CASTING
-   // C++ automatically converts int into double
     int number = 10;
     double result = number;
 
