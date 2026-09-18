@@ -73,8 +73,7 @@ int main()
 
     int num1 = 5;
     int num2 = 2;
-
-    // Both are integers, so the answer will be 2
+   // Both are integers, so the answer will be 2
     int division = num1 / num2;
 
     cout << "\nInteger division:" << endl;
