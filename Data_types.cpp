@@ -83,7 +83,6 @@ int main()
     // Convert one number to double
     // so we can get the decimal answer
     double decimalDivision = static_cast<double>(num1) / num2;
-
     cout << "5 / 2 = " << decimalDivision << endl;
 
 
