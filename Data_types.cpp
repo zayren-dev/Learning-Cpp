@@ -23,8 +23,8 @@ int main()
     cout << "Integer: " << number << endl;
     cout << "Double: " << result << endl;
 
-    int a = 5;
-    double b = 2.5;
+    int a = 8;
+    double b = 4.5;
 
     // a is automatically converted into double
     double sum = a + b;
