@@ -61,7 +61,7 @@ int main()
     double h = e / r;
     double g = static_cast<double>(e / r);
     double j = static_cast<double>(e) / r;
-    cout << h << " " << g << " " << j<<endl;
+    cout << h << " \n" << g << "\n" << j<<endl;
 
 
 
