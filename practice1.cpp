@@ -54,5 +54,16 @@ int main()
     cout << ch3 + 4 << " "<<endl;
     cout << static_cast<char>(ch3 + 4)<<endl;
 
+    cout<< "========================================"<< endl;
+    cout<< "Dry Run 6 "<< endl;
+    int e = 19;
+    int b = 5;
+    double x = e / b;
+    double y = static_cast<double>(e / b);
+    double z = static_cast<double>(e) / b;
+    cout << x << " " << y << " " << z;
+
+
+
     return 0;
 }
