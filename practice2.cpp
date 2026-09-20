@@ -13,6 +13,11 @@ int main()
     int z = -5;
     unsigned int y = z;
     cout << y<<endl;
+    cout<<"========================================"<<endl;
+    cout<<"Dry Run 3 "<<endl;
+    bool a = 8 , b = -6 , c = 0;
+    cout << a << "\n" << b << "\n" << c <<endl;
+
 
 
 return 0;
