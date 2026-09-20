@@ -59,9 +59,9 @@ int main()
     int e = 19;
     int r = 7;
     double h = e / r;
-    double y = static_cast<double>(e / r);
+    double g = static_cast<double>(e / r);
     double z = static_cast<double>(e) / r;
-    cout << h << " " << y << " " << z;
+    cout << h << " " << g << " " << z;
 
 
 
