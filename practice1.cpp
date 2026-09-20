@@ -45,6 +45,14 @@ int main()
 
     cout<< "========================================"<< endl;
     cout<< "Dry Run 5 "<< endl;
+    int f = 9;
+    int k = 4;
+    double s = f / k;
+    double o = static_cast<double>(f) / k;
+    char ch3 = 'M';
+    cout << s << " " << o << " "<<endl;
+    cout << ch3 + 4 << " "<<endl;
+    cout << static_cast<char>(ch3 + 4)<<endl;
 
     return 0;
 }
