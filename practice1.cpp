@@ -40,8 +40,11 @@ int main()
     cout << static_cast<char>(z)<<endl;
     char x = '5';
     cout << x + 1<<endl;
-    int n = x - '5';
+    int n = x - '4';
     cout<<n<<endl;
+
+    cout<< "========================================"<< endl;
+    cout<< "Dry Run 5 "<< endl;
 
     return 0;
 }
