@@ -40,7 +40,7 @@ int main()
     cout << static_cast<char>(z)<<endl;
     char x = '5';
     cout << x + 1<<endl;
-    int n = x - '0';
+    int n = x - '5';
     cout<<n<<endl;
 
     return 0;
