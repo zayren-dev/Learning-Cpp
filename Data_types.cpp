@@ -39,8 +39,7 @@ int main()
     cout << "Original value: " << marks << endl;
     cout << "After converting to int: " << wholeMarks << endl;
 
-    // STATIC_CAST
-    // static_cast is another way to do explicit casting
+    // static_cast is another way to do explicit casting.
     double value = 13.75;
 
     int newValue = static_cast<int>(value);
