@@ -38,6 +38,8 @@ int main()
     cout<< "Dry Run 4 "<< endl;
     int x = 68;
     cout << static_cast<char>(x);
+    char x = '5';
+    cout << x+1;
 
     return 0;
 }
