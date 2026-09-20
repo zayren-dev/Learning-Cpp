@@ -21,6 +21,7 @@ int main()
     cout<< myvar<<endl;
     cout<< "========================================"<< endl;
     cout<< "Dry Run 2 "<< endl;
-    
+    char ch = 'M';
+    cout<< ch + 4 <<endl;
     return 0;
 }
