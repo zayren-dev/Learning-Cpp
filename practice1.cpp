@@ -63,7 +63,13 @@ int main()
     double j = static_cast<double>(e) / r;
     cout << h << " \n" << g << "\n" << j<<endl;
 
+    cout<< "========================================"<< endl;
+    cout<< "Dry Run 7 "<< endl;
+    char c = 'N';
+    cout << c + 4 << "\n";
+    cout << static_cast<char>(c + 4) << " "<<endl;
+    cout << c - 'A'<<endl;
 
 
-    return 0;
+return 0;
 }
