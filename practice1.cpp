@@ -86,8 +86,5 @@ int main()
     cout << static_cast<int>(c7) << endl;
     cout << static_cast<char>(c7 - '0') << endl;
 
-
-
-
 return 0;
 }
