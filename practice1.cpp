@@ -71,12 +71,21 @@ int main()
     cout << c - 'A'<<endl;
 
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 7 "<< endl;
+    cout<< "Dry Run 8 "<< endl;
     char i = '8';
     int x1 = i - '0';
     double a3 = x1 / 3;
     double b8 = static_cast<double>(x1) / 3;
-    cout << x1 << " " << a3 << " " << b8;
+    cout << x1 << "\n" << a3 << "\n" << b8<<endl;
+   
+    cout<< "========================================"<< endl;
+    cout<< "Dry Run 9 "<< endl;
+    char c7 = '5';
+    cout << c7 << endl;
+    cout << c7 - '0' << endl;
+    cout << static_cast<int>(c7) << endl;
+    cout << static_cast<char>(c7 - '0') << endl;
+
 
 
 
