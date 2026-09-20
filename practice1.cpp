@@ -70,6 +70,15 @@ int main()
     cout << static_cast<char>(c + 4) << " "<<endl;
     cout << c - 'A'<<endl;
 
+    cout<< "========================================"<< endl;
+    cout<< "Dry Run 7 "<< endl;
+    char i = '8';
+    int x1 = i - '0';
+    double a3 = x1 / 3;
+    double b8 = static_cast<double>(x1) / 3;
+    cout << x1 << " " << a3 << " " << b8;
+
+
 
 return 0;
 }
