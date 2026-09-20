@@ -36,7 +36,8 @@ int main()
 
     cout<< "========================================"<< endl;
     cout<< "Dry Run 4 "<< endl;
-    
+    int x = 68;
+    cout << static_cast<char>(x);
 
     return 0;
 }
