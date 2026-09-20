@@ -60,8 +60,8 @@ int main()
     int r = 7;
     double h = e / r;
     double g = static_cast<double>(e / r);
-    double z = static_cast<double>(e) / r;
-    cout << h << " " << g << " " << z;
+    double j = static_cast<double>(e) / r;
+    cout << h << " " << g << " " << j<<endl;
 
 
 
