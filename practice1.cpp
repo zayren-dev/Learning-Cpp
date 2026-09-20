@@ -58,10 +58,10 @@ int main()
     cout<< "Dry Run 6 "<< endl;
     int e = 19;
     int r = 7;
-    double x = e / r;
+    double h = e / r;
     double y = static_cast<double>(e / r);
     double z = static_cast<double>(e) / r;
-    cout << x << " " << y << " " << z;
+    cout << h << " " << y << " " << z;
 
 
 
