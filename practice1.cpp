@@ -39,7 +39,9 @@ int main()
     int z = 68;
     cout << static_cast<char>(z)<<endl;
     char x = '5';
-    cout << x + 1;
+    cout << x + 1<<endl;
+    int n = x - '0';
+    cout<<n<<endl;
 
     return 0;
 }
