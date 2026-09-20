@@ -21,11 +21,17 @@ int main()
     cout<< myvar<<endl;
 
 
-    
+
     cout<< "========================================"<< endl;
     cout<< "Dry Run 2 "<< endl;
-    char ch = 'M';
-    cout<< ch + 4 <<endl;
-    cout << static_cast<char>(ch + 4);
+    char ch1 = 'M';
+    cout<< ch1 + 4 <<endl;
+    cout << static_cast<char>(ch1 + 4);
+
+
+    cout<< "========================================"<< endl;
+    cout<< "Dry Run 3 "<< endl;
+    char ch2 = 'd';
+    cout << ch2 - 'a';
     return 0;
 }
