@@ -26,20 +26,20 @@ int main()
     cout<< "Dry Run 2 "<< endl;
     char ch1 = 'M';
     cout<< ch1 + 4 <<endl;
-    cout << static_cast<char>(ch1 + 4);
+    cout << static_cast<char>(ch1 + 4)<< endl;
 
 
     cout<< "========================================"<< endl;
     cout<< "Dry Run 3 "<< endl;
     char ch2 = 'd';
-    cout << ch2 - 'a';
+    cout << ch2 - 'a'<< endl;
 
     cout<< "========================================"<< endl;
     cout<< "Dry Run 4 "<< endl;
-    int x = 68;
-    cout << static_cast<char>(x);
+    int z = 68;
+    cout << static_cast<char>(z)<<endl;
     char x = '5';
-    cout << x+1;
+    cout << x + 1;
 
     return 0;
 }
