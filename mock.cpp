@@ -30,7 +30,8 @@ int main() {
     }
     
     if (!flag) { // flag is false. !flag is true. Enters block.
-        cout << right << setfill(' ') << fixed << setprecision(2) << setw(6) << d << " " << a << " " << b << endl;
+        cout << right << setfill(' ') << fixed << setprecision(2) << setw(6) << d << " " << 
+        a << " " << b << endl;
         // d is 7.8. fixed setprecision(2) -> 7.80. setw(6) right-aligned spaces -> "  7.80".
         // outer a is 17. b is 5.
         // Output: "  7.80 17 5"

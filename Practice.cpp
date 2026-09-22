@@ -10,7 +10,7 @@ int main()
   int cond = (2*a)/(a+1);
 
   int tax = cond* (fee * 0.1) + (1 - cond) * (fee * 0.05);
-  cout << "tax " << tax << endl;
+  cout << "TAX " << tax << endl;
   cout << "The condition is " << cond << endl;
   return 0;
 
