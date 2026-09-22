@@ -45,7 +45,7 @@ int main()
     int newValue = static_cast<int>(value);
 
     cout << "\nStatic cast:" << endl;
-    cout << "Original value: " << value << endl;
+    cout << "Original value becomes: " << value << endl;
     cout << "After static_cast: " << newValue << endl;
 
 
