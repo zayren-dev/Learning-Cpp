@@ -49,7 +49,7 @@ int main()
     cout << "After static_cast: " << newValue << endl;
 
 
-    // static_cast can also convert int into double
+    
     int x = 10;
 
     double converted = static_cast<double>(x);
