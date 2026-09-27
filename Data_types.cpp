@@ -57,7 +57,7 @@ int main()
     cout << "Integer: " << x << endl;
     cout << "Converted to double: " << converted << endl;
 
-    // C-STYLE CASTING
+    
    // C-style casting uses (datatype)value
     double number2 = 25.75;
 
