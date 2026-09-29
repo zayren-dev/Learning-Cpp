@@ -79,7 +79,7 @@ int main()
     cout << x1 << "\n" << a3 << "\n" << b8<<endl;
    
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 9 "<< endl;
+    cout<< "Dry Run 009 "<< endl;
     char c7 = '5';
     cout << c7 << endl;
     cout << c7 - '0' << endl;
