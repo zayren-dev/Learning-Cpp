@@ -4,17 +4,17 @@ int main()
 {
     
     cout << "========================================"<< endl;
-    cout << "Dry Run 01 "<< endl;
+    cout << "Dry Run 1 "<< endl;
     unsigned short x = 65500;
     x = x + 100;
     cout << x<<endl;
     cout<<"========================================"<<endl;
-    cout<<"Dry Run 02 "<<endl;
+    cout<<"Dry Run 2 "<<endl;
     int z = -5;
     unsigned int y = z;
     cout << y<<endl;
     cout<<"========================================"<<endl;
-    cout<<"Dry Run 03 "<<endl;
+    cout<<"Dry Run 3 "<<endl;
     bool a = 8 , b = -6 , c = 0;
     cout << a << "\n" << b << "\n" << c <<endl;
     if (-1)
@@ -22,14 +22,14 @@ int main()
     else
        cout << "NO"<<endl;
     cout<<"========================================"<<endl;
-    cout<<"Dry Run 04 "<<endl;
+    cout<<"Dry Run 4 "<<endl;
     int x1 = 0;
     if (false && ++x1)
        cout << "YES";
     cout << x1<<endl;
     
     cout<<"========================================"<<endl;
-    cout<<"Dry Run 05 "<<endl;
+    cout<<"Dry Run 5 "<<endl;
     int x2 = 10;
    if (true) {
        int y3 = 20;
@@ -47,7 +47,7 @@ int main()
    cout << x4<<endl;
 
    cout<<"========================================"<<endl;
-   cout<<"Dry Run 06 "<<endl;
+   cout<<"Dry Run 6 "<<endl;
    int m;
    cin >> m;
    int hour = m/100;
