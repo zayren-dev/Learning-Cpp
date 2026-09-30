@@ -7,7 +7,7 @@ int main() {
     cout << "Enter the height of the pyramid: ";
     cin >> height;
 
-    // Loop through each row
+    
     for (int i = 1; i <= height; i++) {
 
         // Print spaces before the stars
