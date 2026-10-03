@@ -6,7 +6,7 @@ int main()
     int a = 5;
     int b = 3;
 
-    // Bitwise AND (&)
+    
     cout << "Bitwise AND: " << (a & b) << endl;
 
     // Bitwise OR (|)
