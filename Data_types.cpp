@@ -15,7 +15,7 @@ int main()
     cout << "Grade: " << grade << endl;
     cout << "Passed: " << passed << endl;
 
-    
+    // implicit casting
     int number = 10;
     double result = number;
 
