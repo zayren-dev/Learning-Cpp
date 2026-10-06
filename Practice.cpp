@@ -1,4 +1,4 @@
-/* This is a simple C++ program that demonstrates how to perform if-else work without actually
+/* C++ program that demonstrates how to perform if-else work without actually
 using ifs , logical and relational operators. */
 #include<iostream>
 using namespace std;
