@@ -15,7 +15,7 @@ int main()
 
    if (age >= 18)
     {
-        cout << "You are an adult." << endl;
+        cout << "You are an adult twin." << endl;
 
         if (marks >= 50)
         {
