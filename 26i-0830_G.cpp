@@ -26,13 +26,15 @@ int main()
 
      case 2:
             
-           
     double windSpeed, slopeAngle, dryness;
     long long lastfour_digits;
-
+    cout << " Enter the wind speed (U): ";
     cin >> windSpeed;
+    cout << " Enter the slope angle in radians (Θ): ";
     cin >> slopeAngle;
+    cout << " Enter the dryness (D): ";
     cin >> dryness;
+    cout << " Enter the last four digits of your roll no: ";
     cin >> lastfour_digits;
 
     const double w_knot = 0.8;
