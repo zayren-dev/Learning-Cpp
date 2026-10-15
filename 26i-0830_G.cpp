@@ -37,11 +37,11 @@ int main()
     cout << " Enter the last four digits of your roll no: ";
     cin >> lastfour_digits;
 
-    const double w_knot = 0.8;
-    const double beta = 0.12;
-    const double u_knot = 15.0;
-    const double miu = 3.4;
-    const double d_knot = 0.5;
+    double w_knot = 0.8;
+    double beta = 0.12;
+    double u_knot = 15.0;
+    double miu = 3.4;
+    double d_knot = 0.5;
     // finding the delta_velocity using the given formula
     double delta_velocity = w_knot * exp(beta * windSpeed) + u_knot * sin(slopeAngle) * sin(slopeAngle)
                     + miu * log((dryness + 1.0) / d_knot)
