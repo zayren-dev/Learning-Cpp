@@ -104,7 +104,7 @@ int main()
     pass = (stamina >= 0 && stamina <= 100) ? pass : 0;
     pass = (players_left >= 2 && players_left <= 456) ? pass : 0;
     pass = (bet >= 0 && bet <= 2) ? pass : 0;
-    pass = (stake >= 0 && stake <= 2000) ? pass : 0;
+    pass = (bet == 0 || (stake >= 0 && stake <= 2000)) ? pass : 0;
     pass = (favor >= 0 && favor <= 3) ? pass : 0;
     pass = (cash >= 0 && cash <= 6000) ? pass : 0;
     pass = (debt >= 0 && debt <= 3000) ? pass : 0;
