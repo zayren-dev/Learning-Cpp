@@ -181,45 +181,39 @@ int main()
    medpass = (medpass > 900) ? 900 : medpass;
    favorDiscount = (favor == 3 && injuries >= 1) ? medpass : favorDiscount;
 
-    // ---------- settlement ----------
-    int gross = itemsAfterSurcharge + lateFee + guardToll + weightPenalty + wager;
-    int net = gross + injuryTax - allyRebate - calmRebate - favorDiscount;
-    net = (net < 0) ? 0 : net;
+   int gross = itemsAfterSurcharge + lateFee + guardToll + weightPenalty + wager;
+   int net = gross + injuryTax - allyRebate - calmRebate - favorDiscount;
+   net = (net < 0) ? 0 : net;
+   int debtFee = (net > cash) ? (80 + debt / 20) : 0;
+   int total = net + debtFee; total = (total < 200) ? 200 : total;
+   int fees = lateFee + guardToll + weightPenalty + injuryTax + debtFee;
+   int cashUsed = (cash < total) ? cash : total;
+   int payable = total - cashUsed;
 
-    int DebtFee = (net > cash) ? (80 + debt / 20) : 0;
+   int survival_Chance = 40;
 
-    int Total = net + DebtFee;
-    Total = (Total < 200) ? 200 : Total;
-
-    int Fees = lateFee + guardToll + weightPenalty + injuryTax + DebtFee;
-    int CashUsed = (cash < Total) ? cash : Total;
-    int Payable = Total - CashUsed;
-
-    // ---------- survival chance ----------
-    int SurvivalChance = 40;
-
-    SurvivalChance += take_rope ? ((ropeM / 2 > 15) ? 15 : ropeM / 2) : 0;
-    SurvivalChance += take_bandages ? ((2 * bandages > 12) ? 12 : 2 * bandages) : 0;
-    SurvivalChance += stamina / 4;
-    SurvivalChance += card ? 8 : -25;
-    SurvivalChance += ally ? 5 : 0;
-    SurvivalChance -= overweight / 2;
-    SurvivalChance -= 5 * (surchargePct / 10);
-    SurvivalChance -= 8 * injuries;
-    SurvivalChance -= 4 * (game - 1);
-    SurvivalChance -= (DebtFee > 0) ? 12 : 0;
+    survival_Chance += take_rope ? ((ropeM / 2 > 15) ? 15 : ropeM / 2) : 0;
+    survival_Chance += take_bandages ? ((2 * bandages > 12) ? 12 : 2 * bandages) : 0;
+    survival_Chance += stamina / 4;
+    survival_Chance += card ? 8 : -25;
+    survival_Chance += ally ? 5 : 0;
+    survival_Chance -= overweight / 2;
+    survival_Chance -= 5 * (surchargePct / 10);
+    survival_Chance -= 8 * injuries;
+    survival_Chance -= 4 * (game - 1);
+    survival_Chance -= (debtFee > 0) ? 12 : 0;
 
     // game-specific item bonus
     int itemBonus = 0;
     itemBonus = (game == 2 && take_needles && needles >= 5) ? 10 : itemBonus;
     itemBonus = (game == 4 && take_marbles && marbles >= 20) ? 10 : itemBonus;
     itemBonus = (game == 5 && take_rope && ropeM >= 10) ? 10 : itemBonus;
-    SurvivalChance += itemBonus;
+    survival_Chance += itemBonus;
 
     // clamp 0..100
-    SurvivalChance = (SurvivalChance < 0) ? 0 : (SurvivalChance > 100) ? 100 : SurvivalChance;
+    survival_Chance = (survival_Chance < 0) ? 0 : (survival_Chance > 100) ? 100 : survival_Chance;
 
-    int survived = (SurvivalChance >= 55) ? 1 : 0;
+    int survived = (survival_Chance >= 55) ? 1 : 0;
 
     // ---------- prize & final balance ----------
     int prizePool = (456 - players_left) * 100;
@@ -227,9 +221,9 @@ int main()
 
     int BetPayout = 0;
     BetPayout = (survived && bet == 1) ? (stake * 3) / 2 : BetPayout;
-    BetPayout = (survived && bet == 2) ? ((SurvivalChance >= 75) ? stake * 4 : 0) : BetPayout;
+    BetPayout = (survived && bet == 2) ? ((survival_Chance >= 75) ? stake * 4 : 0) : BetPayout;
 
-    int FinalBalance = cash - Total + PrizeShare + BetPayout;
+    int FinalBalance = cash - total + PrizeShare + BetPayout;
 
     // if validation failed, force everything to zero
     NeedleCost     *= pass;
@@ -243,11 +237,11 @@ int main()
     weightPenalty  *= pass;
     wager          *= pass;
     favorDiscount  *= pass;
-    Fees           *= pass;
-    Total          *= pass;
-    CashUsed       *= pass;
-    Payable        *= pass;
-    SurvivalChance *= pass;
+    fees           *= pass;
+    total          *= pass;
+    cashUsed       *= pass;
+    payable        *= pass;
+    survival_Chance *= pass;
     PrizeShare     *= pass;
     BetPayout      *= pass;
     FinalBalance   *= pass;
@@ -265,11 +259,11 @@ int main()
     cout << "WeightPenalty=" << weightPenalty << endl;
     cout << "Wager=" << wager << endl;
     cout << "FavorDiscount=" << favorDiscount << endl;
-    cout << "Fees=" << Fees << endl;
-    cout << "Total=" << Total << endl;
-    cout << "CashUsed=" << CashUsed << endl;
-    cout << "Payable=" << Payable << endl;
-    cout << "SurvivalChance=" << SurvivalChance << endl;
+    cout << "Fees=" << fees << endl;
+    cout << "Total=" << total << endl;
+    cout << "CashUsed=" << cashUsed << endl;
+    cout << "Payable=" << payable << endl;
+    cout << "SurvivalChance=" << survival_Chance << endl;
     cout << "Outcome=" << (survived ? "Survived" : "Eliminated") << endl;
     cout << "PrizeShare=" << PrizeShare << endl;
     cout << "BetPayout=" << BetPayout << endl;
