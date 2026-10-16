@@ -18,11 +18,10 @@ int main()
     cout << "Enter your choice: ";
     cin >> choice;
 
-    switch (choice)
-    {
+    switch (choice) {
     case 1:
+    {
     
-    // all the inputs in the exact order given
     char type;
     int game, time_left, guard_alert, injuries;
     int lights_on, cameras;
@@ -259,10 +258,11 @@ int main()
     cout << "PrizeShare=" << PrizeShare << endl;
     cout << "BetPayout=" << BetPayout << endl;
     cout << "FinalBalance=" << FinalBalance << endl;
-
+    }
     break;
 
     case 2:
+    {
             
     double windSpeed, slopeAngle, dryness;
     long long lastfour_digits;
@@ -317,7 +317,7 @@ int main()
     cout << "Telemetry Key K: " << telemetryKey_K << endl;
     cout << "Status Tag: " << first_tag << second_tag << endl;
     cout << "Precision Match Flag: " << exactmatch << endl;
-    cout << "Threat Rating: " << threat << endl;
+    cout << "Threat Rating: " << threat << endl; }
 
     break;
 
