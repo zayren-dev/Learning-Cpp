@@ -85,33 +85,32 @@ int main()
     cout << "Enter ally (0/1): ";
     cin  >> ally;
 
-    // simple validity flag – if anything is out of range we just zero everything later
-    int ok = 1;
-    ok = (type == 'A' || type == 'T' || type == 'G') ? ok : 0;
-    ok = (game >= 1 && game <= 5) ? ok : 0;
-    ok = (time_left >= 0 && time_left <= 120) ? ok : 0;
-    ok = (guard_alert >= 0 && guard_alert <= 100) ? ok : 0;
-    ok = (injuries >= 0 && injuries <= 3) ? ok : 0;
-    ok = (lights_on == 0 || lights_on == 1) ? ok : 0;
-    ok = (cameras == 0 || cameras == 1) ? ok : 0;
-    ok = (take_needles == 0 || take_needles == 1) ? ok : 0;
-    ok = (needles >= 0 && needles <= 40) ? ok : 0;
-    ok = (take_bandages == 0 || take_bandages == 1) ? ok : 0;
-    ok = (bandages >= 0 && bandages <= 30) ? ok : 0;
-    ok = (take_marbles == 0 || take_marbles == 1) ? ok : 0;
-    ok = (marbles >= 0 && marbles <= 100) ? ok : 0;
-    ok = (take_rope == 0 || take_rope == 1) ? ok : 0;
-    ok = (ropeM >= 0 && ropeM <= 60) ? ok : 0;
-    ok = (pack_kg >= 0 && pack_kg <= 150) ? ok : 0;
-    ok = (stamina >= 0 && stamina <= 100) ? ok : 0;
-    ok = (players_left >= 2 && players_left <= 456) ? ok : 0;
-    ok = (bet >= 0 && bet <= 2) ? ok : 0;
-    ok = (stake >= 0 && stake <= 2000) ? ok : 0;
-    ok = (favor >= 0 && favor <= 3) ? ok : 0;
-    ok = (cash >= 0 && cash <= 6000) ? ok : 0;
-    ok = (debt >= 0 && debt <= 3000) ? ok : 0;
-    ok = (card == 0 || card == 1) ? ok : 0;
-    ok = (ally == 0 || ally == 1) ? ok : 0;
+    int pass = 1;
+    pass = (type == 'A' || type == 'T' || type == 'G') ? pass : 0;
+    pass = (game >= 1 && game <= 5) ? pass : 0;
+    pass = (time_left >= 0 && time_left <= 120) ? pass : 0;
+    pass = (guard_alert >= 0 && guard_alert <= 100) ? pass : 0;
+    pass = (injuries >= 0 && injuries <= 3) ? pass : 0;
+    pass = (lights_on == 0 || lights_on == 1) ? pass : 0;
+    pass = (cameras == 0 || cameras == 1) ? pass : 0;
+    pass = (take_needles == 0 || take_needles == 1) ? pass : 0;
+    pass = (needles >= 0 && needles <= 40) ? pass : 0;
+    pass = (take_bandages == 0 || take_bandages == 1) ? pass : 0;
+    pass = (bandages >= 0 && bandages <= 30) ? pass : 0;
+    pass = (take_marbles == 0 || take_marbles == 1) ? pass : 0;
+    pass = (marbles >= 0 && marbles <= 100) ? pass : 0;
+    pass = (take_rope == 0 || take_rope == 1) ? pass : 0;
+    pass = (ropeM >= 0 && ropeM <= 60) ? pass : 0;
+    pass = (pack_kg >= 0 && pack_kg <= 150) ? pass : 0;
+    pass = (stamina >= 0 && stamina <= 100) ? pass : 0;
+    pass = (players_left >= 2 && players_left <= 456) ? pass : 0;
+    pass = (bet >= 0 && bet <= 2) ? pass : 0;
+    pass = (stake >= 0 && stake <= 2000) ? pass : 0;
+    pass = (favor >= 0 && favor <= 3) ? pass : 0;
+    pass = (cash >= 0 && cash <= 6000) ? pass : 0;
+    pass = (debt >= 0 && debt <= 3000) ? pass : 0;
+    pass = (card == 0 || card == 1) ? pass : 0;
+    pass = (ally == 0 || ally == 1) ? pass : 0;
 
     // ---------- unit prices (perks replace the base) ----------
     int needleUnit = 150;
@@ -269,26 +268,26 @@ int main()
     int FinalBalance = cash - Total + PrizeShare + BetPayout;
 
     // if validation failed, force everything to zero
-    NeedleCost     *= ok;
-    BandageCost    *= ok;
-    MarbleCost     *= ok;
-    RopeCost       *= ok;
-    DangerPoints   *= ok;
-    SurchargePct   *= ok;
-    LateFee        *= ok;
-    GuardToll      *= ok;
-    WeightPenalty  *= ok;
-    Wager          *= ok;
-    FavorDiscount  *= ok;
-    Fees           *= ok;
-    Total          *= ok;
-    CashUsed       *= ok;
-    Payable        *= ok;
-    SurvivalChance *= ok;
-    PrizeShare     *= ok;
-    BetPayout      *= ok;
-    FinalBalance   *= ok;
-    survived       *= ok;
+    NeedleCost     *= pass;
+    BandageCost    *= pass;
+    MarbleCost     *= pass;
+    RopeCost       *= pass;
+    DangerPoints   *= pass;
+    SurchargePct   *= pass;
+    LateFee        *= pass;
+    GuardToll      *= pass;
+    WeightPenalty  *= pass;
+    Wager          *= pass;
+    FavorDiscount  *= pass;
+    Fees           *= pass;
+    Total          *= pass;
+    CashUsed       *= pass;
+    Payable        *= pass;
+    SurvivalChance *= pass;
+    PrizeShare     *= pass;
+    BetPayout      *= pass;
+    FinalBalance   *= pass;
+    survived       *= pass;
 
     // ---------- exact output order ----------
     cout << "NeedleCost=" << NeedleCost << endl;
