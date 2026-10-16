@@ -123,7 +123,8 @@ int main()
     int Baseprice_rope = 120;
     Baseprice_rope = (type == 'A') ? 100 : Baseprice_rope;
 
-   
+   int NeedleCost = 0;
+   NeedleCost = (take_needles == 0) ? 0 : (needles <= 10) ? needles * Baseprice_needle : 10 * Baseprice_needle + (needles - 10) * ((Baseprice_needle * 75) / 100);
     // NeedleCost = take_needles ?
     //     ((needles <= 10) ? needles * Baseprice_needle : 10 * Baseprice_needle + (needles - 10) * Baseprice_needle * 75) / 100 : 0;
 
