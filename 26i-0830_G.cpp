@@ -260,10 +260,9 @@ int main()
     cout << "BetPayout=" << BetPayout << endl;
     cout << "FinalBalance=" << FinalBalance << endl;
 
-            
     break;
 
-     case 2:
+    case 2:
             
     double windSpeed, slopeAngle, dryness;
     long long lastfour_digits;
