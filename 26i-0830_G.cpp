@@ -200,10 +200,7 @@ int main()
    survival_Chance -= 4 * (game - 1);
    survival_Chance -= (debtFee > 0) ? 12 : 0;
 
-   int itemBonus = 0;
-   itemBonus = (game == 2 && take_needles && needles >= 5) ? 10 : itemBonus;
-   itemBonus = (game == 4 && take_marbles && marbles >= 20) ? 10 : itemBonus;
-   itemBonus = (game == 5 && take_rope && ropeM >= 10) ? 10 : itemBonus;
+   int itemBonus = (game == 2 && take_needles == 1 && needles >= 5) ? 10 : (game == 4 && take_marbles == 1 && marbles >= 20) ? 10 : (game == 5 && take_rope == 1 && ropeM >= 10) ? 10 : 0;
    survival_Chance += itemBonus;
    survival_Chance = (survival_Chance < 0) ? 0 : (survival_Chance > 100) ? 100 : survival_Chance;
    int survived = (survival_Chance >= 55) ? 1 : 0;
