@@ -85,20 +85,11 @@ int main()
     cout << "Enter ally (0/1): ";
     cin  >> ally;
 
-       
-        
-       
-         
-        
-         
-        
-        
-          
-// simple validity flag – if anything is out of range we just zero everything later
+    // simple validity flag – if anything is out of range we just zero everything later
     int ok = 1;
     ok = (type == 'A' || type == 'T' || type == 'G') ? ok : 0;
     ok = (game >= 1 && game <= 5) ? ok : 0;
-    ok = (timeLeft >= 0 && timeLeft <= 120) ? ok : 0;
+    ok = (timeleft >= 0 && timeleft <= 120) ? ok : 0;
     ok = (guardAlert >= 0 && guardAlert <= 100) ? ok : 0;
     ok = (injuries >= 0 && injuries <= 3) ? ok : 0;
     ok = (lightsOn == 0 || lightsOn == 1) ? ok : 0;
@@ -187,7 +178,7 @@ int main()
     int itemsAfterSurcharge = NeedleS + BandageS + MarbleS + RopeS;
 
     // ---------- fees ----------
-    int LateFee = (timeLeft < 15) ? 250 : (timeLeft < 45) ? 100 : 0;
+    int LateFee = (timeleft < 15) ? 250 : (timeleft < 45) ? 100 : 0;
 
     int GuardToll = 50 + (alertAdj / 10) * 5;
     GuardToll = (card == 1 && cameras == 0) ? 0 : GuardToll;
