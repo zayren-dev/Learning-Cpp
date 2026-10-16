@@ -3,8 +3,7 @@
 #include <iomanip>
 using namespace std;
 
-int main()
-{
+int main(){
     int choice;
     cout << "Choose a question (1-8), or 0 to exit:" << endl;
     cout << "1. Question 1" << endl;
@@ -290,29 +289,28 @@ int main()
 
     break;
 
-    case 3: {
+    case 3: 
+    break;
+
+    case 4: {
     int size;
 
     cout << "Enter size: ";
     cin >> size;
 
-    // i = current row, j = current column
-    for (int i = 0; i < size; i++)
+    for (int row = 0; row < size; row++)
     {
-        for (int j = 0; j < size; j++)
+        for (int column = 0; column < size; column++)
         {
-            // the pattern is the same in all 4 corners (mirror image),
-            // so we only work out the top-left corner
-            // r and c = how far this spot is from the nearest top/bottom
-            // and nearest left/right side
-            int r = i;
-            int c = j;
+        
+            int r = row;
+            int c = column;
 
-            if (size - 1 - i < r)
-                r = size - 1 - i;
+            if (size - 1 - row < r)
+                r = size - 1 - row;
 
-            if (size - 1 - j < c)
-                c = size - 1 - j;
+            if (size - 1 - column < c)
+                c = size - 1 - column;
 
             // decide if a star goes here
             bool star = false;
@@ -334,13 +332,8 @@ int main()
             else
                 cout << "  ";
         }
-        cout << endl; }
-    
+        cout << endl; }}
     break;
-
-        case 4:
-            
-            break;
 
         case 5:
             
