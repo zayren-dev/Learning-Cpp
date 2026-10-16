@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <cstdlib>
 using namespace std;
 
 int main()
@@ -110,6 +111,7 @@ int main()
     pass = (debt >= 0 && debt <= 3000) ? pass : 0;
     pass = (card == 0 || card == 1) ? pass : 0;
     pass = (ally == 0 || ally == 1) ? pass : 0;
+    pass ? 0 : (cout << "Invalid input" << endl, exit(0), 0);
 
     int Baseprice_needle = 150;
     Baseprice_needle = (type == 'T') ? 120 : Baseprice_needle;
@@ -214,27 +216,6 @@ int main()
    BetPayout = (survived && bet == 2) ? ((survival_Chance >= 75) ? stake * 4 : 0) : BetPayout;
 
    int FinalBalance = cash - total + PrizeShare + BetPayout;
-    NeedleCost     *= pass;
-    BandageCost    *= pass;
-    MarbleCost     *= pass;
-    RopeCost       *= pass;
-    DangerPoints   *= pass;
-    surchargePct   *= pass;
-    lateFee        *= pass;
-    guardToll      *= pass;
-    weightPenalty  *= pass;
-    wager          *= pass;
-    favorDiscount  *= pass;
-    fees           *= pass;
-    total          *= pass;
-    cashUsed       *= pass;
-    payable        *= pass;
-    survival_Chance *= pass;
-    PrizeShare     *= pass;
-    BetPayout      *= pass;
-    FinalBalance   *= pass;
-    survived       *= pass;
-
     cout << "NeedleCost=" << NeedleCost << endl;
     cout << "BandageCost=" << BandageCost << endl;
     cout << "MarbleCost=" << MarbleCost << endl;
