@@ -160,9 +160,8 @@ int main()
    int guardToll = 50 + (alertAdj / 10) * 5;
    guardToll = (card == 1 && cameras == 0) ? 0 : guardToll;
 
-    // carry capacity by type + ally bonus
-    int carryBase = (type == 'A') ? 40 : (type == 'T') ? 30 : 35;
-    int carryCap = carryBase + (ally ? 10 : 0);
+   int carryBase = (type == 'A') ? 40 : (type == 'T') ? 30 : 35;
+   int carryCap = carryBase + (ally ? 10 : 0);
 
     int overWeight = (pack_kg > carryCap) ? pack_kg - carryCap : 0;
     int WeightPenalty = (25 * overWeight > 500) ? 500 : 25 * overWeight;
@@ -218,7 +217,7 @@ int main()
     SurvivalChance += card ? 8 : -25;
     SurvivalChance += ally ? 5 : 0;
     SurvivalChance -= overWeight / 2;
-    SurvivalChance -= 5 * (SurchargePct / 10);
+    SurvivalChance -= 5 * (surchargePct / 10);
     SurvivalChance -= 8 * injuries;
     SurvivalChance -= 4 * (game - 1);
     SurvivalChance -= (DebtFee > 0) ? 12 : 0;
@@ -251,7 +250,7 @@ int main()
     MarbleCost     *= pass;
     RopeCost       *= pass;
     DangerPoints   *= pass;
-    SurchargePct   *= pass;
+    surchargePct   *= pass;
     lateFee        *= pass;
     guardToll      *= pass;
     WeightPenalty  *= pass;
@@ -273,7 +272,7 @@ int main()
     cout << "MarbleCost=" << MarbleCost << endl;
     cout << "RopeCost=" << RopeCost << endl;
     cout << "DangerPoints=" << DangerPoints << endl;
-    cout << "SurchargePct=" << SurchargePct << "%" << endl;
+    cout << "SurchargePct=" << surchargePct << "%" << endl;
     cout << "LateFee=" << lateFee << endl;
     cout << "GuardToll=" << guardToll << endl;
     cout << "WeightPenalty=" << WeightPenalty << endl;
