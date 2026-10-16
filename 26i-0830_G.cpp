@@ -125,15 +125,12 @@ int main()
 
    int NeedleCost = 0;
    NeedleCost = (take_needles == 0) ? 0 : (needles <= 10) ? needles * Baseprice_needle : 10 * Baseprice_needle + (needles - 10) * ((Baseprice_needle * 75) / 100);
-    // NeedleCost = take_needles ?
-    //     ((needles <= 10) ? needles * Baseprice_needle : 10 * Baseprice_needle + (needles - 10) * Baseprice_needle * 75) / 100 : 0;
 
     // marbles: first 50 full, rest at 50%
-    int discMarble = (Basseprice_marble * 50) / 100;
     int MarbleCost = 0;
     MarbleCost = take_marbles ?
         ((marbles <= 50) ? marbles * Basseprice_marble
-                         : 50 * Basseprice_marble + (marbles - 50) * discMarble)
+                         : 50 * Basseprice_marble + (marbles - 50) * (Basseprice_marble * 50) / 100)
         : 0;
 
     // bandages: buy 2 get 1 free → pay for (bandages - bandages/3)
