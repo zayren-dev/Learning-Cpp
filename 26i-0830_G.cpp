@@ -151,6 +151,7 @@ int main()
    DangerPoints = (DangerPoints < 0) ? 0 : DangerPoints;
 
    int surchargePct = (DangerPoints >= 7) ? 50 : (DangerPoints >= 5) ? 25 : (DangerPoints >= 3) ? 10 : 0;
+   // gonna declare new same name variables because we need original ones as output so we can't change 
    int NeedleS = (NeedleCost * (100 + surchargePct)) / 100;
    int BandageS = (BandageCost * (100 + surchargePct)) / 100;
    int MarbleS = (MarbleCost * (100 + surchargePct)) / 100;
@@ -163,10 +164,10 @@ int main()
    int carryBase = (type == 'A') ? 40 : (type == 'T') ? 30 : 35;
    int carryCap = carryBase + (ally ? 10 : 0);
 
-    int overWeight = (pack_kg > carryCap) ? pack_kg - carryCap : 0;
-    int WeightPenalty = (25 * overWeight > 500) ? 500 : 25 * overWeight;
+   int overweight = (pack_kg > carryCap) ? pack_kg - carryCap : 0; // calculates the over weight for the weight penalty
+   int weightPenalty = (25 * overweight > 500) ? 500 : 25 * overweight; // calculating the weight penlaty using the above over weight
 
-    int Wager = (bet != 0) ? stake : 0;   // not counted inside Fees
+    int wager = (bet != 0) ? stake : 0;   // not counted inside Fees
 
     // ---------- rebates & injury tax ----------
     int AllyRebate = ally ? 60 : 0;
@@ -195,7 +196,7 @@ int main()
     FavorDiscount = (favor == 3 && injuries >= 1) ? medRaw : FavorDiscount;
 
     // ---------- settlement ----------
-    int gross = itemsAfterSurcharge + lateFee + guardToll + WeightPenalty + Wager;
+    int gross = itemsAfterSurcharge + lateFee + guardToll + weightPenalty + wager;
     int net = gross + InjuryTax - AllyRebate - CalmRebate - FavorDiscount;
     net = (net < 0) ? 0 : net;
 
@@ -204,7 +205,7 @@ int main()
     int Total = net + DebtFee;
     Total = (Total < 200) ? 200 : Total;
 
-    int Fees = lateFee + guardToll + WeightPenalty + InjuryTax + DebtFee;
+    int Fees = lateFee + guardToll + weightPenalty + InjuryTax + DebtFee;
     int CashUsed = (cash < Total) ? cash : Total;
     int Payable = Total - CashUsed;
 
@@ -216,7 +217,7 @@ int main()
     SurvivalChance += stamina / 4;
     SurvivalChance += card ? 8 : -25;
     SurvivalChance += ally ? 5 : 0;
-    SurvivalChance -= overWeight / 2;
+    SurvivalChance -= overweight / 2;
     SurvivalChance -= 5 * (surchargePct / 10);
     SurvivalChance -= 8 * injuries;
     SurvivalChance -= 4 * (game - 1);
@@ -253,8 +254,8 @@ int main()
     surchargePct   *= pass;
     lateFee        *= pass;
     guardToll      *= pass;
-    WeightPenalty  *= pass;
-    Wager          *= pass;
+    weightPenalty  *= pass;
+    wager          *= pass;
     FavorDiscount  *= pass;
     Fees           *= pass;
     Total          *= pass;
@@ -275,8 +276,8 @@ int main()
     cout << "SurchargePct=" << surchargePct << "%" << endl;
     cout << "LateFee=" << lateFee << endl;
     cout << "GuardToll=" << guardToll << endl;
-    cout << "WeightPenalty=" << WeightPenalty << endl;
-    cout << "Wager=" << Wager << endl;
+    cout << "WeightPenalty=" << weightPenalty << endl;
+    cout << "Wager=" << wager << endl;
     cout << "FavorDiscount=" << FavorDiscount << endl;
     cout << "Fees=" << Fees << endl;
     cout << "Total=" << Total << endl;
