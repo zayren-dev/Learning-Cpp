@@ -166,38 +166,29 @@ int main()
 
    int overweight = (pack_kg > carryCap) ? pack_kg - carryCap : 0; // calculates the over weight for the weight penalty
    int weightPenalty = (25 * overweight > 500) ? 500 : 25 * overweight; // calculating the weight penlaty using the above over weight
-
-    int wager = (bet != 0) ? stake : 0;   // not counted inside Fees
-
-    // ---------- rebates & injury tax ----------
-    int AllyRebate = ally ? 60 : 0;
-    int CalmRebate = (injuries == 0 && stamina >= 70) ? 40 : 0;
-
-    int InjuryTax = (injuries == 0) ? 0 :
-                    (injuries == 1) ? 30 :
-                    (injuries == 2) ? 90 : 200;
-
-    // ---------- favors (exactly one, applied last) ----------
-    int FavorDiscount = 0;
-
-    // INSIDER
-    int insiderRaw = (NeedleS + MarbleS) * 15 / 100;
-    insiderRaw = (insiderRaw > 500) ? 500 : insiderRaw;
-    FavorDiscount = (favor == 1 && (game == 2 || game == 4)) ? insiderRaw : FavorDiscount;
+   int wager = (bet != 0) ? stake : 0; 
+   int allyRebate = ally ? 60 : 0;
+   int calmRebate = (injuries == 0 && stamina >= 70) ? 40 : 0;
+   int injuryTax = (injuries == 0) ? 0 : (injuries == 1) ? 30 : (injuries == 2) ? 90 : 200;
+   
+   int favorDiscount = 0;
+   int insiderRaw = (NeedleS + MarbleS) * 15 / 100;
+   insiderRaw = (insiderRaw > 500) ? 500 : insiderRaw;
+   favorDiscount = (favor == 1 && (game == 2 || game == 4)) ? insiderRaw : favorDiscount;
 
     // HUSH
     int hushRaw = (lateFee + guardToll) * 50 / 100;
     hushRaw = (hushRaw > 250) ? 250 : hushRaw;
-    FavorDiscount = (favor == 2 && alertAdj >= 60) ? hushRaw : FavorDiscount;
+    favorDiscount = (favor == 2 && alertAdj >= 60) ? hushRaw : favorDiscount;
 
     // MEDPASS
     int medRaw = BandageS * 35 / 100;
     medRaw = (medRaw > 900) ? 900 : medRaw;
-    FavorDiscount = (favor == 3 && injuries >= 1) ? medRaw : FavorDiscount;
+    favorDiscount = (favor == 3 && injuries >= 1) ? medRaw : favorDiscount;
 
     // ---------- settlement ----------
     int gross = itemsAfterSurcharge + lateFee + guardToll + weightPenalty + wager;
-    int net = gross + InjuryTax - AllyRebate - CalmRebate - FavorDiscount;
+    int net = gross + injuryTax - allyRebate - calmRebate - favorDiscount;
     net = (net < 0) ? 0 : net;
 
     int DebtFee = (net > cash) ? (80 + debt / 20) : 0;
@@ -205,7 +196,7 @@ int main()
     int Total = net + DebtFee;
     Total = (Total < 200) ? 200 : Total;
 
-    int Fees = lateFee + guardToll + weightPenalty + InjuryTax + DebtFee;
+    int Fees = lateFee + guardToll + weightPenalty + injuryTax + DebtFee;
     int CashUsed = (cash < Total) ? cash : Total;
     int Payable = Total - CashUsed;
 
@@ -256,7 +247,7 @@ int main()
     guardToll      *= pass;
     weightPenalty  *= pass;
     wager          *= pass;
-    FavorDiscount  *= pass;
+    favorDiscount  *= pass;
     Fees           *= pass;
     Total          *= pass;
     CashUsed       *= pass;
@@ -278,7 +269,7 @@ int main()
     cout << "GuardToll=" << guardToll << endl;
     cout << "WeightPenalty=" << weightPenalty << endl;
     cout << "Wager=" << wager << endl;
-    cout << "FavorDiscount=" << FavorDiscount << endl;
+    cout << "FavorDiscount=" << favorDiscount << endl;
     cout << "Fees=" << Fees << endl;
     cout << "Total=" << Total << endl;
     cout << "CashUsed=" << CashUsed << endl;
