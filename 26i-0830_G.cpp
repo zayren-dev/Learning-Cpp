@@ -126,7 +126,7 @@ int main()
    NeedleCost = (take_needles == 0) ? 0 : (needles <= 10) ? needles * Baseprice_needle : (10 * Baseprice_needle) + (needles - 10) * ((Baseprice_needle * 75) / 100);
 
    int MarbleCost = 0;
-   MarbleCost = (take_marbles == 0) ? 0 : ((marbles <= 50) ? marbles * Baseprice_marble : (50 * Baseprice_marble) + (marbles - 50) * (Baseprice_marble * 50) / 100);
+   MarbleCost = (take_marbles == 0) ? 0 : ((marbles <= 50) ? marbles * Baseprice_marble : (50 * Baseprice_marble) + (marbles - 50) * ((Baseprice_marble * 50) / 100));
 
    int BandageCost = 0;
    BandageCost = (take_bandages == 0) ? 0 :  (bandages - bandages / 3) * Baseprice_bandage;
@@ -192,9 +192,10 @@ int main()
    int survival_Chance = 40;
    survival_Chance += (take_rope == 1) ? ((ropeM / 2 > 15) ? 15 : ropeM / 2) : 0;
    survival_Chance += (take_bandages == 1) ? ((2 * bandages > 12) ? 12 : 2 * bandages) : 0;
+   survival_Chance += stamina / 4;
    survival_Chance += (card == 1) ? 8 : -25;
    survival_Chance += (ally == 1) ? 5 : 0;
-   survival_Chance = (survival_Chance - overweight) / 2;
+   survival_Chance -= overweight / 2;
    survival_Chance -= 5 * (surchargePct / 10);
    survival_Chance -= 8 * injuries;
    survival_Chance -= 4 * (game - 1);
