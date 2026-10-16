@@ -20,7 +20,284 @@ int main()
 
     switch (choice)
     {
-        case 1:
+    case 1:
+    
+    // all the inputs in the exact order given
+    char type;
+    int game, timeLeft, guardAlert, injuries;
+    int lightsOn, cameras;
+    int takeNeedles, needles;
+    int takeBandages, bandages;
+    int takeMarbles, marbles;
+    int takeRope, ropeM;
+    int packKg, stamina, playersLeft;
+    int bet, stake, favor;
+    int cash, debt, card, ally;
+
+    cout << "Enter type (A/T/G): ";
+    cin >> type; 
+    cout << "Enter game (1-5): ";
+    cout << "Enter timeLeft (0-120): ";
+    cout << "Enter guardAlert (0-100): ";
+    cout << "Enter injuries (0-3): ";
+    cout << "Enter lightsOn (0/1): ";
+    cout << "Enter cameras (0/1): ";
+    cout << "Enter takeNeedles (0/1): ";
+    cout << "Enter needles (0-40): ";
+    cout << "Enter takeBandages (0/1): ";
+    cout << "Enter bandages (0-30): ";
+    cout << "Enter takeMarbles (0/1): ";
+    cout << "Enter marbles (0-100): ";
+    cout << "Enter takeRope (0/1): ";
+    cout << "Enter ropeM (0-60): ";
+    cout << "Enter packKg (0-150): ";
+    cout << "Enter stamina (0-100): ";
+    cout << "Enter playersLeft (2-456): ";
+    cout << "Enter bet (0/1/2): ";
+    cout << "Enter stake (0-2000): ";
+    cout << "Enter favor (0-3): ";
+    cout << "Enter cash (0-6000): ";
+    cout << "Enter debt (0-3000): ";
+    cout << "Enter card (0/1): ";
+    cout << "Enter ally (0/1): ";
+
+    >> game >> timeLeft >> guardAlert >> injuries
+        >> lightsOn >> cameras
+        >> takeNeedles >> needles
+        >> takeBandages >> bandages
+        >> takeMarbles >> marbles
+        >> takeRope >> ropeM
+        >> packKg >> stamina >> playersLeft
+        >> bet >> stake >> favor
+        >> cash >> debt >> card >> ally;
+
+    // simple validity flag – if anything is out of range we just zero everything later
+    int ok = 1;
+    ok = (type == 'A' || type == 'T' || type == 'G') ? ok : 0;
+    ok = (game >= 1 && game <= 5) ? ok : 0;
+    ok = (timeLeft >= 0 && timeLeft <= 120) ? ok : 0;
+    ok = (guardAlert >= 0 && guardAlert <= 100) ? ok : 0;
+    ok = (injuries >= 0 && injuries <= 3) ? ok : 0;
+    ok = (lightsOn == 0 || lightsOn == 1) ? ok : 0;
+    ok = (cameras == 0 || cameras == 1) ? ok : 0;
+    ok = (takeNeedles == 0 || takeNeedles == 1) ? ok : 0;
+    ok = (needles >= 0 && needles <= 40) ? ok : 0;
+    ok = (takeBandages == 0 || takeBandages == 1) ? ok : 0;
+    ok = (bandages >= 0 && bandages <= 30) ? ok : 0;
+    ok = (takeMarbles == 0 || takeMarbles == 1) ? ok : 0;
+    ok = (marbles >= 0 && marbles <= 100) ? ok : 0;
+    ok = (takeRope == 0 || takeRope == 1) ? ok : 0;
+    ok = (ropeM >= 0 && ropeM <= 60) ? ok : 0;
+    ok = (packKg >= 0 && packKg <= 150) ? ok : 0;
+    ok = (stamina >= 0 && stamina <= 100) ? ok : 0;
+    ok = (playersLeft >= 2 && playersLeft <= 456) ? ok : 0;
+    ok = (bet >= 0 && bet <= 2) ? ok : 0;
+    ok = (stake >= 0 && stake <= 2000) ? ok : 0;
+    ok = (favor >= 0 && favor <= 3) ? ok : 0;
+    ok = (cash >= 0 && cash <= 6000) ? ok : 0;
+    ok = (debt >= 0 && debt <= 3000) ? ok : 0;
+    ok = (card == 0 || card == 1) ? ok : 0;
+    ok = (ally == 0 || ally == 1) ? ok : 0;
+
+    // ---------- unit prices (perks replace the base) ----------
+    int needleUnit = 150;
+    needleUnit = (type == 'T') ? 120 : needleUnit;
+
+    int bandageUnit = 350;
+
+    int marbleUnit = 60;
+    marbleUnit = (type == 'G') ? 45 : marbleUnit;
+
+    int ropeUnit = 120;
+    ropeUnit = (type == 'A') ? 100 : ropeUnit;
+
+    // ---------- item costs (before surcharge) ----------
+    // needles: first 10 full price, rest at 75%
+    int discNeedle = (needleUnit * 75) / 100;
+    int NeedleCost = 0;
+    NeedleCost = takeNeedles ?
+        ((needles <= 10) ? needles * needleUnit
+                         : 10 * needleUnit + (needles - 10) * discNeedle)
+        : 0;
+
+    // marbles: first 50 full, rest at 50%
+    int discMarble = (marbleUnit * 50) / 100;
+    int MarbleCost = 0;
+    MarbleCost = takeMarbles ?
+        ((marbles <= 50) ? marbles * marbleUnit
+                         : 50 * marbleUnit + (marbles - 50) * discMarble)
+        : 0;
+
+    // bandages: buy 2 get 1 free → pay for (bandages - bandages/3)
+    int BandageCost = 0;
+    BandageCost = takeBandages ? (bandages - bandages / 3) * bandageUnit : 0;
+
+    // rope just meters * unit
+    int RopeCost = 0;
+    RopeCost = takeRope ? ropeM * ropeUnit : 0;
+
+    // ---------- alert adjustment ----------
+    int alertAdj = guardAlert;
+    alertAdj = alertAdj + (takeMarbles ? marbles / 5 : 0);
+    alertAdj = alertAdj + (takeRope ? ropeM / 3 : 0);
+    alertAdj = alertAdj + (lightsOn ? 10 : 0);
+    alertAdj = alertAdj + (cameras ? 5 : 0);
+    alertAdj = (alertAdj > 100) ? 100 : alertAdj;   // clamp max 100
+
+    // ---------- danger points ----------
+    int crowd = (playersLeft > 300) ? 3 : (playersLeft > 150) ? 2 : (playersLeft > 50) ? 1 : 0;
+    int alertPts = (alertAdj >= 70) ? 2 : (alertAdj >= 40) ? 1 : 0;
+    int gamePts = (game >= 4) ? 2 : (game >= 2) ? 1 : 0;
+    int camPts = cameras ? 1 : 0;
+    int darkPts = lightsOn ? 0 : -1;
+
+    int DangerPoints = crowd + alertPts + gamePts + camPts + darkPts;
+    DangerPoints = (DangerPoints < 0) ? 0 : DangerPoints;   // clamp min 0
+
+    // ---------- surcharge ----------
+    int SurchargePct = (DangerPoints >= 7) ? 50 : (DangerPoints >= 5) ? 25 : (DangerPoints >= 3) ? 10 : 0;
+
+    int NeedleS = (NeedleCost * (100 + SurchargePct)) / 100;
+    int BandageS = (BandageCost * (100 + SurchargePct)) / 100;
+    int MarbleS = (MarbleCost * (100 + SurchargePct)) / 100;
+    int RopeS = (RopeCost * (100 + SurchargePct)) / 100;
+    int itemsAfterSurcharge = NeedleS + BandageS + MarbleS + RopeS;
+
+    // ---------- fees ----------
+    int LateFee = (timeLeft < 15) ? 250 : (timeLeft < 45) ? 100 : 0;
+
+    int GuardToll = 50 + (alertAdj / 10) * 5;
+    GuardToll = (card == 1 && cameras == 0) ? 0 : GuardToll;
+
+    // carry capacity by type + ally bonus
+    int carryBase = (type == 'A') ? 40 : (type == 'T') ? 30 : 35;
+    int carryCap = carryBase + (ally ? 10 : 0);
+
+    int overWeight = (packKg > carryCap) ? packKg - carryCap : 0;
+    int WeightPenalty = (25 * overWeight > 500) ? 500 : 25 * overWeight;
+
+    int Wager = (bet != 0) ? stake : 0;   // not counted inside Fees
+
+    // ---------- rebates & injury tax ----------
+    int AllyRebate = ally ? 60 : 0;
+    int CalmRebate = (injuries == 0 && stamina >= 70) ? 40 : 0;
+
+    int InjuryTax = (injuries == 0) ? 0 :
+                    (injuries == 1) ? 30 :
+                    (injuries == 2) ? 90 : 200;
+
+    // ---------- favors (exactly one, applied last) ----------
+    int FavorDiscount = 0;
+
+    // INSIDER
+    int insiderRaw = (NeedleS + MarbleS) * 15 / 100;
+    insiderRaw = (insiderRaw > 500) ? 500 : insiderRaw;
+    FavorDiscount = (favor == 1 && (game == 2 || game == 4)) ? insiderRaw : FavorDiscount;
+
+    // HUSH
+    int hushRaw = (LateFee + GuardToll) * 50 / 100;
+    hushRaw = (hushRaw > 250) ? 250 : hushRaw;
+    FavorDiscount = (favor == 2 && alertAdj >= 60) ? hushRaw : FavorDiscount;
+
+    // MEDPASS
+    int medRaw = BandageS * 35 / 100;
+    medRaw = (medRaw > 900) ? 900 : medRaw;
+    FavorDiscount = (favor == 3 && injuries >= 1) ? medRaw : FavorDiscount;
+
+    // ---------- settlement ----------
+    int gross = itemsAfterSurcharge + LateFee + GuardToll + WeightPenalty + Wager;
+    int net = gross + InjuryTax - AllyRebate - CalmRebate - FavorDiscount;
+    net = (net < 0) ? 0 : net;
+
+    int DebtFee = (net > cash) ? (80 + debt / 20) : 0;
+
+    int Total = net + DebtFee;
+    Total = (Total < 200) ? 200 : Total;
+
+    int Fees = LateFee + GuardToll + WeightPenalty + InjuryTax + DebtFee;
+    int CashUsed = (cash < Total) ? cash : Total;
+    int Payable = Total - CashUsed;
+
+    // ---------- survival chance ----------
+    int SurvivalChance = 40;
+
+    SurvivalChance += takeRope ? ((ropeM / 2 > 15) ? 15 : ropeM / 2) : 0;
+    SurvivalChance += takeBandages ? ((2 * bandages > 12) ? 12 : 2 * bandages) : 0;
+    SurvivalChance += stamina / 4;
+    SurvivalChance += card ? 8 : -25;
+    SurvivalChance += ally ? 5 : 0;
+    SurvivalChance -= overWeight / 2;
+    SurvivalChance -= 5 * (SurchargePct / 10);
+    SurvivalChance -= 8 * injuries;
+    SurvivalChance -= 4 * (game - 1);
+    SurvivalChance -= (DebtFee > 0) ? 12 : 0;
+
+    // game-specific item bonus
+    int itemBonus = 0;
+    itemBonus = (game == 2 && takeNeedles && needles >= 5) ? 10 : itemBonus;
+    itemBonus = (game == 4 && takeMarbles && marbles >= 20) ? 10 : itemBonus;
+    itemBonus = (game == 5 && takeRope && ropeM >= 10) ? 10 : itemBonus;
+    SurvivalChance += itemBonus;
+
+    // clamp 0..100
+    SurvivalChance = (SurvivalChance < 0) ? 0 : (SurvivalChance > 100) ? 100 : SurvivalChance;
+
+    int survived = (SurvivalChance >= 55) ? 1 : 0;
+
+    // ---------- prize & final balance ----------
+    int prizePool = (456 - playersLeft) * 100;
+    int PrizeShare = survived ? (prizePool / playersLeft) : 0;
+
+    int BetPayout = 0;
+    BetPayout = (survived && bet == 1) ? (stake * 3) / 2 : BetPayout;
+    BetPayout = (survived && bet == 2) ? ((SurvivalChance >= 75) ? stake * 4 : 0) : BetPayout;
+
+    int FinalBalance = cash - Total + PrizeShare + BetPayout;
+
+    // if validation failed, force everything to zero
+    NeedleCost     *= ok;
+    BandageCost    *= ok;
+    MarbleCost     *= ok;
+    RopeCost       *= ok;
+    DangerPoints   *= ok;
+    SurchargePct   *= ok;
+    LateFee        *= ok;
+    GuardToll      *= ok;
+    WeightPenalty  *= ok;
+    Wager          *= ok;
+    FavorDiscount  *= ok;
+    Fees           *= ok;
+    Total          *= ok;
+    CashUsed       *= ok;
+    Payable        *= ok;
+    SurvivalChance *= ok;
+    PrizeShare     *= ok;
+    BetPayout      *= ok;
+    FinalBalance   *= ok;
+    survived       *= ok;
+
+    // ---------- exact output order ----------
+    cout << "NeedleCost=" << NeedleCost << endl;
+    cout << "BandageCost=" << BandageCost << endl;
+    cout << "MarbleCost=" << MarbleCost << endl;
+    cout << "RopeCost=" << RopeCost << endl;
+    cout << "DangerPoints=" << DangerPoints << endl;
+    cout << "SurchargePct=" << SurchargePct << "%" << endl;
+    cout << "LateFee=" << LateFee << endl;
+    cout << "GuardToll=" << GuardToll << endl;
+    cout << "WeightPenalty=" << WeightPenalty << endl;
+    cout << "Wager=" << Wager << endl;
+    cout << "FavorDiscount=" << FavorDiscount << endl;
+    cout << "Fees=" << Fees << endl;
+    cout << "Total=" << Total << endl;
+    cout << "CashUsed=" << CashUsed << endl;
+    cout << "Payable=" << Payable << endl;
+    cout << "SurvivalChance=" << SurvivalChance << endl;
+    cout << "Outcome=" << (survived ? "Survived" : "Eliminated") << endl;
+    cout << "PrizeShare=" << PrizeShare << endl;
+    cout << "BetPayout=" << BetPayout << endl;
+    cout << "FinalBalance=" << FinalBalance << endl;
+
             
         break;
 
