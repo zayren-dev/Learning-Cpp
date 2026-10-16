@@ -116,8 +116,8 @@ int main()
     
     int Baseprice_bandage = 350;
 
-    int Basseprice_marble = 60;
-    Basseprice_marble = (type == 'G') ? 45 : Basseprice_marble;
+    int Baseprice_marble = 60;
+    Baseprice_marble = (type == 'G') ? 45 : Baseprice_marble;
 
     int Baseprice_rope = 120;
     Baseprice_rope = (type == 'A') ? 100 : Baseprice_rope;
@@ -126,7 +126,7 @@ int main()
    NeedleCost = (take_needles == 0) ? 0 : (needles <= 10) ? needles * Baseprice_needle : (10 * Baseprice_needle) + (needles - 10) * ((Baseprice_needle * 75) / 100);
 
    int MarbleCost = 0;
-   MarbleCost = (take_marbles == 0) ? 0 : ((marbles <= 50) ? marbles * Basseprice_marble : (50 * Basseprice_marble) + (marbles - 50) * (Basseprice_marble * 50) / 100);
+   MarbleCost = (take_marbles == 0) ? 0 : ((marbles <= 50) ? marbles * Baseprice_marble : (50 * Baseprice_marble) + (marbles - 50) * (Baseprice_marble * 50) / 100);
 
    int BandageCost = 0;
    BandageCost = (take_bandages == 0) ? 0 :  (bandages - bandages / 3) * Baseprice_bandage;
