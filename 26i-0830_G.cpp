@@ -122,13 +122,11 @@ int main()
 
     int Baseprice_rope = 120;
     Baseprice_rope = (type == 'A') ? 100 : Baseprice_rope;
-    
-    // needles: first 10 full price, rest at 75%
-    int discNeedle = (Baseprice_needle * 75) / 100;
+
     int NeedleCost = 0;
     NeedleCost = take_needles ?
         ((needles <= 10) ? needles * Baseprice_needle
-                         : 10 * Baseprice_needle + (needles - 10) * discNeedle)
+                         : 10 * Baseprice_needle + (needles - 10) * Baseprice_needle * 75) / 100)
         : 0;
 
     // marbles: first 50 full, rest at 50%
