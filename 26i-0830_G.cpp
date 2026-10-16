@@ -190,11 +190,10 @@ int main()
    int payable = total - cashUsed;
 
    int survival_Chance = 40;
-   survival_Chance = (survival_Chance + take_rope) ? ((ropeM / 2 > 15) ? 15 : ropeM / 2) : 0;
-   survival_Chance = (survival_Chance + take_bandages) ? ((2 * bandages > 12) ? 12 : 2 * bandages) : 0;
-   survival_Chance = (survival_Chance + stamina) / 4;
-   survival_Chance = (survival_Chance + card) ? 8 : -25;
-   survival_Chance = (survival_Chance + ally) ? 5 : 0;
+   survival_Chance += (take_rope == 1) ? ((ropeM / 2 > 15) ? 15 : ropeM / 2) : 0;
+   survival_Chance += (take_bandages == 1) ? ((2 * bandages > 12) ? 12 : 2 * bandages) : 0;
+   survival_Chance += (card == 1) ? 8 : -25;
+   survival_Chance += (ally == 1) ? 5 : 0;
    survival_Chance = (survival_Chance - overweight) / 2;
    survival_Chance -= 5 * (surchargePct / 10);
    survival_Chance -= 8 * injuries;
