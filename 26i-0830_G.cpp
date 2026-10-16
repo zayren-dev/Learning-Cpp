@@ -124,18 +124,13 @@ int main()
     Baseprice_rope = (type == 'A') ? 100 : Baseprice_rope;
 
    int NeedleCost = 0;
-   NeedleCost = (take_needles == 0) ? 0 : (needles <= 10) ? needles * Baseprice_needle : 10 * Baseprice_needle + (needles - 10) * ((Baseprice_needle * 75) / 100);
+   NeedleCost = (take_needles == 0) ? 0 : (needles <= 10) ? needles * Baseprice_needle : (10 * Baseprice_needle) + (needles - 10) * ((Baseprice_needle * 75) / 100);
 
-    // marbles: first 50 full, rest at 50%
-    int MarbleCost = 0;
-    MarbleCost = take_marbles ?
-        ((marbles <= 50) ? marbles * Basseprice_marble
-                         : 50 * Basseprice_marble + (marbles - 50) * (Basseprice_marble * 50) / 100)
-        : 0;
+   int MarbleCost = 0;
+   MarbleCost = (take_marbles == 0) ? 0 : ((marbles <= 50) ? marbles * Basseprice_marble : (50 * Basseprice_marble) + (marbles - 50) * (Basseprice_marble * 50) / 100);
 
-    // bandages: buy 2 get 1 free → pay for (bandages - bandages/3)
-    int BandageCost = 0;
-    BandageCost = take_bandages ? (bandages - bandages / 3) * Baseprice_bandage : 0;
+   int BandageCost = 0;
+   BandageCost = (take_bandages == 0) ? 0 :  (bandages - bandages / 3) * Baseprice_bandage;
 
     // rope just meters * unit
     int RopeCost = 0;
