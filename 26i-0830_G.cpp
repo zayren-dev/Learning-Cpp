@@ -150,20 +150,15 @@ int main()
    int DangerPoints = crowdPts + alertPts + gamePts + camerasPts + darknessPts;
    DangerPoints = (DangerPoints < 0) ? 0 : DangerPoints;
 
-    // ---------- surcharge ----------
-    int SurchargePct = (DangerPoints >= 7) ? 50 : (DangerPoints >= 5) ? 25 : (DangerPoints >= 3) ? 10 : 0;
-
-    int NeedleS = (NeedleCost * (100 + SurchargePct)) / 100;
-    int BandageS = (BandageCost * (100 + SurchargePct)) / 100;
-    int MarbleS = (MarbleCost * (100 + SurchargePct)) / 100;
-    int RopeS = (RopeCost * (100 + SurchargePct)) / 100;
-    int itemsAfterSurcharge = NeedleS + BandageS + MarbleS + RopeS;
-
-    // ---------- fees ----------
-    int LateFee = (time_left < 15) ? 250 : (time_left < 45) ? 100 : 0;
-
-    int GuardToll = 50 + (alertAdj / 10) * 5;
-    GuardToll = (card == 1 && cameras == 0) ? 0 : GuardToll;
+   int surchargePct = (DangerPoints >= 7) ? 50 : (DangerPoints >= 5) ? 25 : (DangerPoints >= 3) ? 10 : 0;
+   int NeedleS = (NeedleCost * (100 + surchargePct)) / 100;
+   int BandageS = (BandageCost * (100 + surchargePct)) / 100;
+   int MarbleS = (MarbleCost * (100 + surchargePct)) / 100;
+   int RopeS = (RopeCost * (100 + surchargePct)) / 100;
+   int itemsAfterSurcharge = NeedleS + BandageS + MarbleS + RopeS;
+   int lateFee = (time_left < 15) ? 250 : (time_left < 45) ? 100 : 0;
+   int guardToll = 50 + (alertAdj / 10) * 5;
+   guardToll = (card == 1 && cameras == 0) ? 0 : guardToll;
 
     // carry capacity by type + ally bonus
     int carryBase = (type == 'A') ? 40 : (type == 'T') ? 30 : 35;
@@ -191,7 +186,7 @@ int main()
     FavorDiscount = (favor == 1 && (game == 2 || game == 4)) ? insiderRaw : FavorDiscount;
 
     // HUSH
-    int hushRaw = (LateFee + GuardToll) * 50 / 100;
+    int hushRaw = (lateFee + guardToll) * 50 / 100;
     hushRaw = (hushRaw > 250) ? 250 : hushRaw;
     FavorDiscount = (favor == 2 && alertAdj >= 60) ? hushRaw : FavorDiscount;
 
@@ -201,7 +196,7 @@ int main()
     FavorDiscount = (favor == 3 && injuries >= 1) ? medRaw : FavorDiscount;
 
     // ---------- settlement ----------
-    int gross = itemsAfterSurcharge + LateFee + GuardToll + WeightPenalty + Wager;
+    int gross = itemsAfterSurcharge + lateFee + guardToll + WeightPenalty + Wager;
     int net = gross + InjuryTax - AllyRebate - CalmRebate - FavorDiscount;
     net = (net < 0) ? 0 : net;
 
@@ -210,7 +205,7 @@ int main()
     int Total = net + DebtFee;
     Total = (Total < 200) ? 200 : Total;
 
-    int Fees = LateFee + GuardToll + WeightPenalty + InjuryTax + DebtFee;
+    int Fees = lateFee + guardToll + WeightPenalty + InjuryTax + DebtFee;
     int CashUsed = (cash < Total) ? cash : Total;
     int Payable = Total - CashUsed;
 
@@ -257,8 +252,8 @@ int main()
     RopeCost       *= pass;
     DangerPoints   *= pass;
     SurchargePct   *= pass;
-    LateFee        *= pass;
-    GuardToll      *= pass;
+    lateFee        *= pass;
+    guardToll      *= pass;
     WeightPenalty  *= pass;
     Wager          *= pass;
     FavorDiscount  *= pass;
@@ -279,8 +274,8 @@ int main()
     cout << "RopeCost=" << RopeCost << endl;
     cout << "DangerPoints=" << DangerPoints << endl;
     cout << "SurchargePct=" << SurchargePct << "%" << endl;
-    cout << "LateFee=" << LateFee << endl;
-    cout << "GuardToll=" << GuardToll << endl;
+    cout << "LateFee=" << lateFee << endl;
+    cout << "GuardToll=" << guardToll << endl;
     cout << "WeightPenalty=" << WeightPenalty << endl;
     cout << "Wager=" << Wager << endl;
     cout << "FavorDiscount=" << FavorDiscount << endl;
