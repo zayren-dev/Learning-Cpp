@@ -112,42 +112,40 @@ int main()
     pass = (card == 0 || card == 1) ? pass : 0;
     pass = (ally == 0 || ally == 1) ? pass : 0;
 
-    // ---------- unit prices (perks replace the base) ----------
-    int needleUnit = 150;
-    needleUnit = (type == 'T') ? 120 : needleUnit;
+    int Baseprice_needle = 150;
+    Baseprice_needle = (type == 'T') ? 120 : Baseprice_needle;
+    
+    int Baseprice_bandage = 350;
 
-    int bandageUnit = 350;
+    int Basseprice_marble = 60;
+    Basseprice_marble = (type == 'G') ? 45 : Basseprice_marble;
 
-    int marbleUnit = 60;
-    marbleUnit = (type == 'G') ? 45 : marbleUnit;
-
-    int ropeUnit = 120;
-    ropeUnit = (type == 'A') ? 100 : ropeUnit;
-
-    // ---------- item costs (before surcharge) ----------
+    int Baseprice_rope = 120;
+    Baseprice_rope = (type == 'A') ? 100 : Baseprice_rope;
+    
     // needles: first 10 full price, rest at 75%
-    int discNeedle = (needleUnit * 75) / 100;
+    int discNeedle = (Baseprice_needle * 75) / 100;
     int NeedleCost = 0;
     NeedleCost = take_needles ?
-        ((needles <= 10) ? needles * needleUnit
-                         : 10 * needleUnit + (needles - 10) * discNeedle)
+        ((needles <= 10) ? needles * Baseprice_needle
+                         : 10 * Baseprice_needle + (needles - 10) * discNeedle)
         : 0;
 
     // marbles: first 50 full, rest at 50%
-    int discMarble = (marbleUnit * 50) / 100;
+    int discMarble = (Basseprice_marble * 50) / 100;
     int MarbleCost = 0;
     MarbleCost = take_marbles ?
-        ((marbles <= 50) ? marbles * marbleUnit
-                         : 50 * marbleUnit + (marbles - 50) * discMarble)
+        ((marbles <= 50) ? marbles * Basseprice_marble
+                         : 50 * Basseprice_marble + (marbles - 50) * discMarble)
         : 0;
 
     // bandages: buy 2 get 1 free → pay for (bandages - bandages/3)
     int BandageCost = 0;
-    BandageCost = take_bandages ? (bandages - bandages / 3) * bandageUnit : 0;
+    BandageCost = take_bandages ? (bandages - bandages / 3) * Baseprice_bandage : 0;
 
     // rope just meters * unit
     int RopeCost = 0;
-    RopeCost = take_rope ? ropeM * ropeUnit : 0;
+    RopeCost = take_rope ? ropeM * Baseprice_rope : 0;
 
     // ---------- alert adjustment ----------
     int alertAdj = guard_alert;
