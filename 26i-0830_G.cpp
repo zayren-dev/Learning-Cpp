@@ -261,7 +261,7 @@ int main()
     cout << "FinalBalance=" << FinalBalance << endl;
 
             
-        break;
+    break;
 
      case 2:
             
