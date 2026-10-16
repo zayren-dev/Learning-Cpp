@@ -132,27 +132,23 @@ int main()
    int BandageCost = 0;
    BandageCost = (take_bandages == 0) ? 0 :  (bandages - bandages / 3) * Baseprice_bandage;
 
-    // rope just meters * unit
-    int RopeCost = 0;
-    RopeCost = take_rope ? ropeM * Baseprice_rope : 0;
+   int RopeCost = 0;
+   RopeCost = (take_rope ==0 ) ? 0: ropeM * Baseprice_rope;
 
-    // ---------- alert adjustment ----------
-    int alertAdj = guard_alert;
-    alertAdj = alertAdj + (take_marbles ? marbles / 5 : 0);
-    alertAdj = alertAdj + (take_rope ? ropeM / 3 : 0);
-    alertAdj = alertAdj + (lights_on ? 10 : 0);
-    alertAdj = alertAdj + (cameras ? 5 : 0);
-    alertAdj = (alertAdj > 100) ? 100 : alertAdj;   // clamp max 100
+   int alertAdj = guard_alert;
+   alertAdj = alertAdj + (take_marbles ? marbles / 5 : 0);
+   alertAdj = alertAdj + (take_rope ? ropeM / 3 : 0);
+   alertAdj = alertAdj + (lights_on ? 10 : 0);
+   alertAdj = alertAdj + (cameras ? 5 : 0);
+   alertAdj = (alertAdj > 100) ? 100 : alertAdj; 
 
-    // ---------- danger points ----------
-    int crowd = (players_left > 300) ? 3 : (players_left > 150) ? 2 : (players_left > 50) ? 1 : 0;
-    int alertPts = (alertAdj >= 70) ? 2 : (alertAdj >= 40) ? 1 : 0;
-    int gamePts = (game >= 4) ? 2 : (game >= 2) ? 1 : 0;
-    int camPts = cameras ? 1 : 0;
-    int darkPts = lights_on ? 0 : -1;
-
-    int DangerPoints = crowd + alertPts + gamePts + camPts + darkPts;
-    DangerPoints = (DangerPoints < 0) ? 0 : DangerPoints;   // clamp min 0
+   int crowdPts = (players_left > 300) ? 3 : (players_left > 150) ? 2 : (players_left > 50) ? 1 : 0;
+   int alertPts = (alertAdj >= 70) ? 2 : (alertAdj >= 40) ? 1 : 0;
+   int gamePts = (game >= 4) ? 2 : (game >= 2) ? 1 : 0;
+   int camerasPts = cameras ? 1 : 0;
+   int darknessPts = lights_on ? 0 : -1;
+   int DangerPoints = crowdPts + alertPts + gamePts + camerasPts + darknessPts;
+   DangerPoints = (DangerPoints < 0) ? 0 : DangerPoints;
 
     // ---------- surcharge ----------
     int SurchargePct = (DangerPoints >= 7) ? 50 : (DangerPoints >= 5) ? 25 : (DangerPoints >= 3) ? 10 : 0;
