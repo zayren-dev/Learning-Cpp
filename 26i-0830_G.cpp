@@ -172,19 +172,14 @@ int main()
    int injuryTax = (injuries == 0) ? 0 : (injuries == 1) ? 30 : (injuries == 2) ? 90 : 200;
    
    int favorDiscount = 0;
-   int insiderRaw = (NeedleS + MarbleS) * 15 / 100;
-   insiderRaw = (insiderRaw > 500) ? 500 : insiderRaw;
-   favorDiscount = (favor == 1 && (game == 2 || game == 4)) ? insiderRaw : favorDiscount;
-
-    // HUSH
-    int hushRaw = (lateFee + guardToll) * 50 / 100;
-    hushRaw = (hushRaw > 250) ? 250 : hushRaw;
-    favorDiscount = (favor == 2 && alertAdj >= 60) ? hushRaw : favorDiscount;
-
-    // MEDPASS
-    int medRaw = BandageS * 35 / 100;
-    medRaw = (medRaw > 900) ? 900 : medRaw;
-    favorDiscount = (favor == 3 && injuries >= 1) ? medRaw : favorDiscount;
+   int insider = ((NeedleS + MarbleS) * 15 / 100> 500) ? 500 : (NeedleS + MarbleS) * 15 / 100;
+   favorDiscount = (favor == 1 && (game == 2 || game == 4)) ? (NeedleS + MarbleS) * 15 / 100 : favorDiscount;
+   int hush = (lateFee + guardToll) * 50 / 100;
+   hush = (hush > 250) ? 250 : hush;
+   favorDiscount = (favor == 2 && alertAdj >= 60) ? hush : favorDiscount;
+   int medpass = BandageS * 35 / 100;
+   medpass = (medpass > 900) ? 900 : medpass;
+   favorDiscount = (favor == 3 && injuries >= 1) ? medpass : favorDiscount;
 
     // ---------- settlement ----------
     int gross = itemsAfterSurcharge + lateFee + guardToll + weightPenalty + wager;
