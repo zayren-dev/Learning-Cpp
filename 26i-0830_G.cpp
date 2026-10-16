@@ -24,7 +24,7 @@ int main()
     
     // all the inputs in the exact order given
     char type;
-    int game, timeLeft, guardAlert, injuries;
+    int game, timeleft, guardAlert, injuries;
     int lightsOn, cameras;
     int takeNeedles, needles;
     int takeBandages, bandages;
@@ -37,41 +37,64 @@ int main()
     cout << "Enter type (A/T/G): ";
     cin >> type; 
     cout << "Enter game (1-5): ";
+    cin >> game;
     cout << "Enter timeLeft (0-120): ";
+    cin >> timeleft;
     cout << "Enter guardAlert (0-100): ";
+    cin >> guardAlert;
     cout << "Enter injuries (0-3): ";
+    cin >> injuries;
     cout << "Enter lightsOn (0/1): ";
+    cin >> lightsOn;
     cout << "Enter cameras (0/1): ";
+    cin  >> cameras;
     cout << "Enter takeNeedles (0/1): ";
+    cin >> takeNeedles ;
     cout << "Enter needles (0-40): ";
+    cin  >> needles;
     cout << "Enter takeBandages (0/1): ";
+    cin >> takeBandages;
     cout << "Enter bandages (0-30): ";
+    cin >> bandages;
     cout << "Enter takeMarbles (0/1): ";
+    cin >> takeMarbles;
     cout << "Enter marbles (0-100): ";
+    cin  >> marbles;
     cout << "Enter takeRope (0/1): ";
+    cin >> takeRope;
     cout << "Enter ropeM (0-60): ";
+    cin >> ropeM;
     cout << "Enter packKg (0-150): ";
+    cin >> packKg;
     cout << "Enter stamina (0-100): ";
+    cin  >> stamina;
     cout << "Enter playersLeft (2-456): ";
+    cin  >> playersLeft;
     cout << "Enter bet (0/1/2): ";
+    cin >> bet;
     cout << "Enter stake (0-2000): ";
+    cin >> stake ;
     cout << "Enter favor (0-3): ";
+    cin  >> favor;
     cout << "Enter cash (0-6000): ";
+    cin >> cash;
     cout << "Enter debt (0-3000): ";
+    cin >> debt;
     cout << "Enter card (0/1): ";
+    cin >> card;
     cout << "Enter ally (0/1): ";
+    cin  >> ally;
 
-    >> game >> timeLeft >> guardAlert >> injuries
-        >> lightsOn >> cameras
-        >> takeNeedles >> needles
-        >> takeBandages >> bandages
-        >> takeMarbles >> marbles
-        >> takeRope >> ropeM
-        >> packKg >> stamina >> playersLeft
-        >> bet >> stake >> favor
-        >> cash >> debt >> card >> ally;
-
-    // simple validity flag – if anything is out of range we just zero everything later
+       
+        
+       
+         
+        
+         
+        
+        
+          
+// simple validity flag – if anything is out of range we just zero everything later
     int ok = 1;
     ok = (type == 'A' || type == 'T' || type == 'G') ? ok : 0;
     ok = (game >= 1 && game <= 5) ? ok : 0;
