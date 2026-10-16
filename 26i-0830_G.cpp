@@ -172,7 +172,7 @@ int main()
    
    int favorDiscount = 0;
    int insider = ((NeedleS + MarbleS) * 15 / 100> 500) ? 500 : (NeedleS + MarbleS) * 15 / 100;
-   favorDiscount = (favor == 1 && (game == 2 || game == 4)) ? (NeedleS + MarbleS) * 15 / 100 : favorDiscount;
+   favorDiscount = (favor == 1 && (game == 2 || game == 4)) ? insider : favorDiscount;
    int hush = (lateFee + guardToll) * 50 / 100;
    hush = (hush > 250) ? 250 : hush;
    favorDiscount = (favor == 2 && alertAdj >= 60) ? hush : favorDiscount;
