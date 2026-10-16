@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-#include <cstdlib>
 using namespace std;
 
 int main()
@@ -23,67 +22,68 @@ int main()
     case 1:
     {
     
-    char type;
-    int game, time_left, guard_alert, injuries;
-    int lights_on, cameras;
-    int take_needles, needles;
-    int take_bandages, bandages;
-    int take_marbles, marbles;
-    int take_rope, ropeM;
-    int pack_kg, stamina, players_left;
-    int bet, stake, favor;
-    int cash, debt, card, ally;
+        char type = 'A';
+    int game = 1, time_left = 0, guard_alert = 0, injuries = 0;
+    int lights_on = 0, cameras = 0;
+    int take_needles = 0, needles = 0;
+    int take_bandages = 0, bandages = 0;
+    int take_marbles = 0, marbles = 0;
+    int take_rope = 0, ropeM = 0;
+    int pack_kg = 0, stamina = 0, players_left = 2;
+    int bet = 0, stake = 0, favor = 0;
+    int cash = 0, debt = 0, card = 0, ally = 0;
+    int pass = 1;
 
-    cout << "Enter type (A/T/G): ";
-    cin >> type; 
-    cout << "Enter game (1-5): ";
-    cin >> game;
-    cout << "Enter timeLeft (0-120): ";
-    cin >> time_left;
-    cout << "Enter guardAlert (0-100): ";
-    cin >> guard_alert;
-    cout << "Enter injuries (0-3): ";
-    cin >> injuries;
-    cout << "Enter lightsOn (0/1): ";
-    cin >> lights_on;
-    cout << "Enter cameras (0/1): ";
-    cin  >> cameras;
-    cout << "Enter takeNeedles (0/1): ";
-    cin >> take_needles ;
-    cout << "Enter needles (0-40): ";
-    cin  >> needles;
-    cout << "Enter takeBandages (0/1): ";
-    cin >> take_bandages;
-    cout << "Enter bandages (0-30): ";
-    cin >> bandages;
-    cout << "Enter takeMarbles (0/1): ";
-    cin >> take_marbles;
-    cout << "Enter marbles (0-100): ";
-    cin  >> marbles;
-    cout << "Enter takeRope (0/1): ";
-    cin >> take_rope;
-    cout << "Enter ropeM (0-60): ";
-    cin >> ropeM;
-    cout << "Enter packKg (0-150): ";
-    cin >> pack_kg;
-    cout << "Enter stamina (0-100): ";
-    cin  >> stamina;
-    cout << "Enter playersLeft (2-456): ";
-    cin  >> players_left;
-    cout << "Enter bet (0/1/2): ";
-    cin >> bet;
-    cout << "Enter stake (0-2000): ";
-    cin >> stake ;
-    cout << "Enter favor (0-3): ";
-    cin  >> favor;
-    cout << "Enter cash (0-6000): ";
-    cin >> cash;
-    cout << "Enter debt (0-3000): ";
-    cin >> debt;
-    cout << "Enter card (0/1): ";
-    cin >> card;
-    cout << "Enter ally (0/1): ";
-    cin  >> ally;
+    pass && (cout << "Enter type (A/T/G): ") && (cin >> type);
+    pass = (pass && (type == 'A' || type == 'T' || type == 'G')) ? 1 : 0;
+    pass && (cout << "Enter game (1-5): ") && (cin >> game);
+    pass = (pass && game >= 1 && game <= 5) ? 1 : 0;
+    pass && (cout << "Enter timeLeft (0-120): ") && (cin >> time_left);
+    pass = (pass && time_left >= 0 && time_left <= 120) ? 1 : 0;
+    pass && (cout << "Enter guardAlert (0-100): ") && (cin >> guard_alert);
+    pass = (pass && guard_alert >= 0 && guard_alert <= 100) ? 1 : 0;
+    pass && (cout << "Enter injuries (0-3): ") && (cin >> injuries);
+    pass = (pass && injuries >= 0 && injuries <= 3) ? 1 : 0;
+    pass && (cout << "Enter lightsOn (0/1): ") && (cin >> lights_on);
+    pass = (pass && (lights_on == 0 || lights_on == 1)) ? 1 : 0;
+    pass && (cout << "Enter cameras (0/1): ") && (cin >> cameras);
+    pass = (pass && (cameras == 0 || cameras == 1)) ? 1 : 0;
+    pass && (cout << "Enter takeNeedles (0/1): ") && (cin >> take_needles);
+    pass = (pass && (take_needles == 0 || take_needles == 1)) ? 1 : 0;
+    pass && (cout << "Enter needles (0-40): ") && (cin >> needles);
+    pass = (pass && needles >= 0 && needles <= 40) ? 1 : 0;
+    pass && (cout << "Enter takeBandages (0/1): ") && (cin >> take_bandages);
+    pass = (pass && (take_bandages == 0 || take_bandages == 1)) ? 1 : 0;
+    pass && (cout << "Enter bandages (0-30): ") && (cin >> bandages);
+    pass = (pass && bandages >= 0 && bandages <= 30) ? 1 : 0;
+    pass && (cout << "Enter takeMarbles (0/1): ") && (cin >> take_marbles);
+    pass = (pass && (take_marbles == 0 || take_marbles == 1)) ? 1 : 0;
+    pass && (cout << "Enter marbles (0-100): ") && (cin >> marbles);
+    pass = (pass && marbles >= 0 && marbles <= 100) ? 1 : 0;
+    pass && (cout << "Enter takeRope (0/1): ") && (cin >> take_rope);
+    pass = (pass && (take_rope == 0 || take_rope == 1)) ? 1 : 0;
+    pass && (cout << "Enter ropeM (0-60): ") && (cin >> ropeM);
+    pass = (pass && ropeM >= 0 && ropeM <= 60) ? 1 : 0;
+    pass && (cout << "Enter packKg (0-150): ") && (cin >> pack_kg);
+    pass = (pass && pack_kg >= 0 && pack_kg <= 150) ? 1 : 0;
+    pass && (cout << "Enter stamina (0-100): ") && (cin >> stamina);
+    pass = (pass && stamina >= 0 && stamina <= 100) ? 1 : 0;
+    pass && (cout << "Enter playersLeft (2-456): ") && (cin >> players_left);
+    pass = (pass && players_left >= 2 && players_left <= 456) ? 1 : 0;
+    pass && (cout << "Enter bet (0/1/2): ") && (cin >> bet);
+    pass = (pass && bet >= 0 && bet <= 2) ? 1 : 0;
+    pass && (cout << "Enter stake (0-2000): ") && (cin >> stake);
+    pass = (pass && (bet == 0 || (stake >= 0 && stake <= 2000))) ? 1 : 0;
+    pass && (cout << "Enter favor (0-3): ") && (cin >> favor);
+    pass = (pass && favor >= 0 && favor <= 3) ? 1 : 0;
+    pass && (cout << "Enter cash (0-6000): ") && (cin >> cash);
+    pass = (pass && cash >= 0 && cash <= 6000) ? 1 : 0;
+    pass && (cout << "Enter debt (0-3000): ") && (cin >> debt);
+    pass = (pass && debt >= 0 && debt <= 3000) ? 1 : 0;
+    pass && (cout << "Enter card (0/1): ") && (cin >> card);
+    pass = (pass && (card == 0 || card == 1)) ? 1 : 0;
+    pass && (cout << "Enter ally (0/1): ") && (cin >> ally);
+    pass = (pass && (ally == 0 || ally == 1)) ? 1 : 0;
 
     int pass = 1;
     pass = (type == 'A' || type == 'T' || type == 'G') ? pass : 0;
@@ -209,13 +209,32 @@ int main()
    int survived = (survival_Chance >= 55) ? 1 : 0;
   
    int prizePool = (456 - players_left) * 100;
-   int PrizeShare = survived ? (prizePool / players_left) : 0;
+   int PrizeShare = survived ? (prizePool / (players_left < 2 ? 2 : players_left)) : 0;
 
    int BetPayout = 0;
    BetPayout = (survived && bet == 1) ? (stake * 3) / 2 : BetPayout;
    BetPayout = (survived && bet == 2) ? ((survival_Chance >= 75) ? stake * 4 : 0) : BetPayout;
 
    int FinalBalance = cash - total + PrizeShare + BetPayout;
+    NeedleCost      *= pass;
+    BandageCost     *= pass;
+    MarbleCost      *= pass;
+    RopeCost        *= pass;
+    DangerPoints    *= pass;
+    surchargePct    *= pass;
+    lateFee         *= pass;
+    guardToll       *= pass;
+    weightPenalty   *= pass;
+    wager           *= pass;
+    favorDiscount   *= pass;
+    fees            *= pass;
+    total           *= pass;
+    cashUsed        *= pass;
+    payable         *= pass;
+    survival_Chance *= pass;
+    PrizeShare      *= pass;
+    BetPayout       *= pass;
+    FinalBalance    *= pass;
     cout << "NeedleCost=" << NeedleCost << endl;
     cout << "BandageCost=" << BandageCost << endl;
     cout << "MarbleCost=" << MarbleCost << endl;
@@ -232,7 +251,7 @@ int main()
     cout << "CashUsed=" << cashUsed << endl;
     cout << "Payable=" << payable << endl;
     cout << "SurvivalChance=" << survival_Chance << endl;
-    cout << "Outcome=" << (survived ? "Survived" : "Eliminated") << endl;
+    cout << "Outcome=" << (pass ? (survived ? "Survived" : "Eliminated") : "Invalid") << endl;
     cout << "PrizeShare=" << PrizeShare << endl;
     cout << "BetPayout=" << BetPayout << endl;
     cout << "FinalBalance=" << FinalBalance << endl;
