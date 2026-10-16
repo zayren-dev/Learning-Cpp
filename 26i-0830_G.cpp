@@ -191,41 +191,33 @@ int main()
    int payable = total - cashUsed;
 
    int survival_Chance = 40;
+   survival_Chance = survival_Chance + take_rope ? ((ropeM / 2 > 15) ? 15 : ropeM / 2) : 0;
+   survival_Chance = survival_Chance + take_bandages ? ((2 * bandages > 12) ? 12 : 2 * bandages) : 0;
+   survival_Chance = survival_Chance + stamina / 4;
+   survival_Chance = survival_Chance + card ? 8 : -25;
+   survival_Chance = survival_Chance + ally ? 5 : 0;
+   survival_Chance = survival_Chance - overweight / 2;
+   survival_Chance -= 5 * (surchargePct / 10);
+   survival_Chance -= 8 * injuries;
+   survival_Chance -= 4 * (game - 1);
+   survival_Chance -= (debtFee > 0) ? 12 : 0;
 
-    survival_Chance += take_rope ? ((ropeM / 2 > 15) ? 15 : ropeM / 2) : 0;
-    survival_Chance += take_bandages ? ((2 * bandages > 12) ? 12 : 2 * bandages) : 0;
-    survival_Chance += stamina / 4;
-    survival_Chance += card ? 8 : -25;
-    survival_Chance += ally ? 5 : 0;
-    survival_Chance -= overweight / 2;
-    survival_Chance -= 5 * (surchargePct / 10);
-    survival_Chance -= 8 * injuries;
-    survival_Chance -= 4 * (game - 1);
-    survival_Chance -= (debtFee > 0) ? 12 : 0;
+   int itemBonus = 0;
+   itemBonus = (game == 2 && take_needles && needles >= 5) ? 10 : itemBonus;
+   itemBonus = (game == 4 && take_marbles && marbles >= 20) ? 10 : itemBonus;
+   itemBonus = (game == 5 && take_rope && ropeM >= 10) ? 10 : itemBonus;
+   survival_Chance += itemBonus;
+   survival_Chance = (survival_Chance < 0) ? 0 : (survival_Chance > 100) ? 100 : survival_Chance;
+   int survived = (survival_Chance >= 55) ? 1 : 0;
+  
+   int prizePool = (456 - players_left) * 100;
+   int PrizeShare = survived ? (prizePool / players_left) : 0;
 
-    // game-specific item bonus
-    int itemBonus = 0;
-    itemBonus = (game == 2 && take_needles && needles >= 5) ? 10 : itemBonus;
-    itemBonus = (game == 4 && take_marbles && marbles >= 20) ? 10 : itemBonus;
-    itemBonus = (game == 5 && take_rope && ropeM >= 10) ? 10 : itemBonus;
-    survival_Chance += itemBonus;
+   int BetPayout = 0;
+   BetPayout = (survived && bet == 1) ? (stake * 3) / 2 : BetPayout;
+   BetPayout = (survived && bet == 2) ? ((survival_Chance >= 75) ? stake * 4 : 0) : BetPayout;
 
-    // clamp 0..100
-    survival_Chance = (survival_Chance < 0) ? 0 : (survival_Chance > 100) ? 100 : survival_Chance;
-
-    int survived = (survival_Chance >= 55) ? 1 : 0;
-
-    // ---------- prize & final balance ----------
-    int prizePool = (456 - players_left) * 100;
-    int PrizeShare = survived ? (prizePool / players_left) : 0;
-
-    int BetPayout = 0;
-    BetPayout = (survived && bet == 1) ? (stake * 3) / 2 : BetPayout;
-    BetPayout = (survived && bet == 2) ? ((survival_Chance >= 75) ? stake * 4 : 0) : BetPayout;
-
-    int FinalBalance = cash - total + PrizeShare + BetPayout;
-
-    // if validation failed, force everything to zero
+   int FinalBalance = cash - total + PrizeShare + BetPayout;
     NeedleCost     *= pass;
     BandageCost    *= pass;
     MarbleCost     *= pass;
@@ -247,7 +239,6 @@ int main()
     FinalBalance   *= pass;
     survived       *= pass;
 
-    // ---------- exact output order ----------
     cout << "NeedleCost=" << NeedleCost << endl;
     cout << "BandageCost=" << BandageCost << endl;
     cout << "MarbleCost=" << MarbleCost << endl;
