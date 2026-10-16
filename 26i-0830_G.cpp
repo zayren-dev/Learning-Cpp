@@ -85,34 +85,6 @@ int main()
     pass && (cout << "Enter ally (0/1): ") && (cin >> ally);
     pass = (pass && (ally == 0 || ally == 1)) ? 1 : 0;
 
-    int pass = 1;
-    pass = (type == 'A' || type == 'T' || type == 'G') ? pass : 0;
-    pass = (game >= 1 && game <= 5) ? pass : 0;
-    pass = (time_left >= 0 && time_left <= 120) ? pass : 0;
-    pass = (guard_alert >= 0 && guard_alert <= 100) ? pass : 0;
-    pass = (injuries >= 0 && injuries <= 3) ? pass : 0;
-    pass = (lights_on == 0 || lights_on == 1) ? pass : 0;
-    pass = (cameras == 0 || cameras == 1) ? pass : 0;
-    pass = (take_needles == 0 || take_needles == 1) ? pass : 0;
-    pass = (needles >= 0 && needles <= 40) ? pass : 0;
-    pass = (take_bandages == 0 || take_bandages == 1) ? pass : 0;
-    pass = (bandages >= 0 && bandages <= 30) ? pass : 0;
-    pass = (take_marbles == 0 || take_marbles == 1) ? pass : 0;
-    pass = (marbles >= 0 && marbles <= 100) ? pass : 0;
-    pass = (take_rope == 0 || take_rope == 1) ? pass : 0;
-    pass = (ropeM >= 0 && ropeM <= 60) ? pass : 0;
-    pass = (pack_kg >= 0 && pack_kg <= 150) ? pass : 0;
-    pass = (stamina >= 0 && stamina <= 100) ? pass : 0;
-    pass = (players_left >= 2 && players_left <= 456) ? pass : 0;
-    pass = (bet >= 0 && bet <= 2) ? pass : 0;
-    pass = (bet == 0 || (stake >= 0 && stake <= 2000)) ? pass : 0;
-    pass = (favor >= 0 && favor <= 3) ? pass : 0;
-    pass = (cash >= 0 && cash <= 6000) ? pass : 0;
-    pass = (debt >= 0 && debt <= 3000) ? pass : 0;
-    pass = (card == 0 || card == 1) ? pass : 0;
-    pass = (ally == 0 || ally == 1) ? pass : 0;
-    pass ? 0 : (cout << "Invalid input" << endl, exit(0), 0);
-
     int Baseprice_needle = 150;
     Baseprice_needle = (type == 'T') ? 120 : Baseprice_needle;
     
@@ -318,9 +290,53 @@ int main()
 
     break;
 
-        case 3:
-            
-            break;
+    case 3: {
+    int size;
+
+    cout << "Enter size: ";
+    cin >> size;
+
+    // i = current row, j = current column
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            // the pattern is the same in all 4 corners (mirror image),
+            // so we only work out the top-left corner
+            // r and c = how far this spot is from the nearest top/bottom
+            // and nearest left/right side
+            int r = i;
+            int c = j;
+
+            if (size - 1 - i < r)
+                r = size - 1 - i;
+
+            if (size - 1 - j < c)
+                c = size - 1 - j;
+
+            // decide if a star goes here
+            bool star = false;
+
+            // outer border
+            if (r == 0 || c == 0)
+                star = true;
+
+            // even row: line of stars going from the left side up to column r
+            else if (r % 2 == 0 && c <= r)
+                star = true;
+
+            // even column: line of stars going from the top down to row c
+            else if (c % 2 == 0 && r <= c)
+                star = true;
+
+            if (star)
+                cout << "* ";
+            else
+                cout << "  ";
+        }
+        cout << endl; }
+    
+    break;
 
         case 4:
             
