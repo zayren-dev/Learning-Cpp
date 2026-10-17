@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int main(){
@@ -250,14 +252,13 @@ int main(){
     double d_knot = 0.5;
     // finding the delta_velocity using the given formula
     double delta_velocity = w_knot * exp(beta * windSpeed) + u_knot * sin(slopeAngle) * sin(slopeAngle)
-                    + miu * log((dryness + 1.0) / d_knot)
-                    + sqrt(windSpeed) * cos(slopeAngle) + 1.0;
+                    + miu * log((dryness + 1.0) / d_knot) + sqrt(windSpeed * cos(slopeAngle) + 1.0);;
 
     // extracting the parts
-    int v_int = static_cast<int>(delta_velocity);  //truncates the decimal part       
-    double fractional = delta_velocity - v_int;             
-    int F1 = static_cast<int>(fractional * 100); // it will give 1st two        
-    int F2 = static_cast<int>((fractional * 100 - F1) * 100); // it will give last twwo
+    delta_velocity = round(delta_velocity * 10000.0) / 10000.0;
+    int v_int = static_cast<int>(delta_velocity);
+    int F1 = static_cast<int>(round(delta_velocity * 10000)) / 100 % 100;
+    int F2 = static_cast<int>(round(delta_velocity * 10000)) % 100;
 
     // finding R
     int rolloffset_R = static_cast<int>((lastfour_digits % 89) + 10);
@@ -294,50 +295,63 @@ int main(){
 
     case 4: {
     int size;
-
     cout << "Enter size: ";
     cin >> size;
-
     for (int row = 0; row < size; row++)
     {
-        for (int column = 0; column < size; column++)
+      for (int column = 0; column < size; column++)
         {
-        
-            int r = row;
-            int c = column;
-
-            if (size - 1 - row < r)
-                r = size - 1 - row;
-
-            if (size - 1 - column < c)
-                c = size - 1 - column;
-
-            // decide if a star goes here
-            bool star = false;
-
-            // outer border
-            if (r == 0 || c == 0)
-                star = true;
-
-            // even row: line of stars going from the left side up to column r
-            else if (r % 2 == 0 && c <= r)
-                star = true;
-
-            // even column: line of stars going from the top down to row c
-            else if (c % 2 == 0 && r <= c)
-                star = true;
-
-            if (star)
-                cout << "* ";
-            else
-                cout << "  ";
+         if (row <= size / 2 && column <= size / 2)
+            { if (row == 0 || column == 0)
+                  cout << "* ";
+              else if (row % 2 == 0 && column <= row)
+                  cout << "* ";
+              else if (column % 2 == 0 && row <= column)
+                  cout << "* ";
+              else
+                  cout << "  ";
+            }
+            
+        else if (row <= size / 2 && column > size / 2)
+            {
+              if (row == 0 || column == size - 1)
+                  cout << "* ";
+              else if (row % 2 == 0 && size - 1 - column <= row)
+                  cout << "* ";
+              else if ((size - 1 - column) % 2 == 0 && row <= size - 1 - column)
+                  cout << "* ";
+              else
+                  cout << "  ";
+            }
+        else if (row > size / 2 && column <= size / 2)
+            {
+              if (row == size - 1 || column == 0)
+                  cout << "* ";
+              else if ((size - 1 - row) % 2 == 0 && column <= size - 1 - row)
+                  cout << "* ";
+              else if (column % 2 == 0 && size - 1 - row <= column)
+                  cout << "* ";
+              else
+                  cout << "  ";
+            }
+        else
+            {
+              if (row == size - 1 || column == size - 1)
+                    cout << "* ";
+              else if ((size - 1 - row) % 2 == 0 && size - 1 - column <= size - 1 - row)
+                    cout << "* ";
+              else if ((size - 1 - column) % 2 == 0 && size - 1 - row <= size - 1 - column)
+                    cout << "* ";
+              else
+                    cout << "  ";
+            }
         }
-        cout << endl; }}
+        cout << endl;}}
     break;
 
-        case 5:
+    case 5:
             
-            break;
+    break;
 
         case 6:
            
@@ -347,9 +361,9 @@ int main(){
            
             break;
 
-        case 8:
+        case 8: {}
             
-            break;
+        break;
 
         case 0:
             cout << "Exiting program..." << endl;
@@ -360,5 +374,4 @@ int main(){
             break;
     }
 
-    return 0;
-}
+    return 0; }
