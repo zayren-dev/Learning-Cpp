@@ -267,7 +267,6 @@ int main() {
     if (group3 < 10)   cout << zero;
     cout << group3 << " = " << decProduct << endl;
 
-    // ---- A / B and A % B ----
     if (divideByZero) {
         cout << "A / B = undefined (division by zero)" << endl;
         cout << "A % B = undefined (division by zero)" << endl;
@@ -279,15 +278,13 @@ int main() {
         if (quotient < 100)    cout << zero;
         if (quotient < 10)     cout << zero;
         cout << quotient << " = " << decQuotient << endl;
-
         cout << "A % B = ";
         if (remainder < 100000) cout << zero;
         if (remainder < 10000)  cout << zero;
         if (remainder < 1000)   cout << zero;
         if (remainder < 100)    cout << zero;
         if (remainder < 10)     cout << zero;
-        cout << remainder << " = " << decRemainder << endl;
-    }
+        cout << remainder << " = " << decRemainder << endl;}
 
     return 0;
 }
