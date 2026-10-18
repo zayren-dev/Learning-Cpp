@@ -958,6 +958,45 @@ int main(){
         cout << "\n";}
         break;}}}
  case 6:
+{
+    int radius;
+    cout << "\033[Initialize Silent Containment Matrix Radius (e.g., 8, 12, 16):";
+    cin >> radius;
+    cout << endl;
+    int halfHeight    = radius * 3 / 2;               
+    int diamondLimit  = 3 * radius + 1;                
+    int wallPosition  = radius * 7 / 4;               
+    int wallThickness = radius / 4 - 1;               
+    int whiteBand     = 2 * (radius / 8) + 1;         
+    int leftMargin    = 3 * radius;                 
+
+    if (wallThickness < 1)
+        wallThickness = 1;
+
+    int whiteStart = diamondLimit - whiteBand + 1;    
+
+    for (int y = -halfHeight; y <= halfHeight; y++)
+    {
+        for (int pad = 0; pad < leftMargin; pad++)
+            cout << ' ';
+
+        for (int x = -wallPosition; x <= wallPosition; x++)
+        {
+            int sideDistance = abs(x);
+            int rowDistance  = abs(y);
+            int slant        = sideDistance + 2 * rowDistance;
+
+            bool insideHexagon = (slant <= diamondLimit) && (sideDistance <= wallPosition);
+            bool onWhiteSlope  = insideHexagon && (slant >= whiteStart);
+            bool onWhiteWall   = insideHexagon && (sideDistance > wallPosition - wallThickness);
+
+            if (onWhiteSlope || onWhiteWall)
+                cout << "\033[97mX";
+            else
+                cout << ' ';
+        }
+        cout << "\033[0m" << endl;
+    }}
 break;
 
         case 7:
