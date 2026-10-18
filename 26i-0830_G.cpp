@@ -349,9 +349,112 @@ int main(){
         cout << endl;}}
     break;
 
-    case 5:
-            
+    case 5:{
+    int choice5;    
+    cout << " Choose which part you want 1 for A or 2 for B" ;
+    cin >> choice5;
+    switch (choice5) {
+    case 1:{
+    cout << " -----PART A-----";
+    // part A ki jagah idhr h 
+    }
     break;
+    case 2 : {
+    // part B idher ( thomas and the tank)
+    cout << " -----PART B-----";
+    int trainCode;
+    cout << "Enter a 4-digit number: ";
+    cin >> trainCode;
+
+    // Validate that the input is strictly a 4-digit number
+    if (trainCode < 1000 || trainCode > 9999) {
+        cout << "Invalid input! Please enter a 4-digit integer." << endl;
+        return 0;
+    }
+
+    // Extract each digit using basic arithmetic (division and modulus)
+    int c1 = trainCode / 1000;         // 1st digit (thousands)
+    int c2 = (trainCode / 100) % 10;    // 2nd digit (hundreds)
+    int c3 = (trainCode / 10) % 10;     // 3rd digit (tens)
+    int c4 = trainCode % 10;            // 4th digit (units)
+
+    // Validate that every compartment digit is between 1 and 4
+    if ((c1 < 1 || c1 > 4) || (c2 < 1 || c2 > 4) || 
+        (c3 < 1 || c3 > 4) || (c4 < 1 || c4 > 4)) {
+        cout << "Invalid compartment ID! Digits must only be 1, 2, 3, or 4." << endl;
+        return 0;
+    }
+
+    // The train height is 6 lines total
+    for (int line = 1; line <= 6; line++) {
+
+        // Print across the 4 compartment positions (from position 1 to 4)
+        for (int pos = 1; pos <= 4; pos++) {
+
+            // Identify which compartment type is at the current position
+            int car = 0;
+            if (pos == 1) {
+                car = c1;
+            } else if (pos == 2) {
+                car = c2;
+            } else if (pos == 3) {
+                car = c3;
+            } else if (pos == 4) {
+                car = c4;
+            }
+
+            // LINE 1: Smoke / Roof / Chimney tops
+            if (line == 1) {
+                if (car == 1)      cout << "   o o         ";
+                else if (car == 2) cout << "               ";
+                else if (car == 3) cout << "|=============|";
+                else if (car == 4) cout << "     [___]     ";
+            }
+            // LINE 2: Upper cabin and roof borders
+            else if (line == 2) {
+                if (car == 1)      cout << "   [_]         ";
+                else if (car == 2) cout << "               ";
+                else if (car == 3) cout << "|  |   []   | |";
+                else if (car == 4) cout << " .--=========--.";
+            }
+            // LINE 3: Upper windows / body frame
+            else if (line == 3) {
+                if (car == 1)      cout << "| ___|_[]   []|";
+                else if (car == 2) cout << "| [] [] [] [] |";
+                else if (car == 3) cout << "|  |   ||   | |";
+                else if (car == 4) cout << "|             |";
+            }
+            // LINE 4: Lower windows / cabin body
+            else if (line == 4) {
+                if (car == 1)      cout << "|_()_|_____|  |";
+                else if (car == 2) cout << "| [] [] [] [] |";
+                else if (car == 3) cout << "|  |___||___| |";
+                else if (car == 4) cout << "(             )";
+            }
+            // LINE 5: Base rail / chassis
+            else if (line == 5) {
+                if (car == 1)      cout << "<=============]";
+                else if (car == 2) cout << "|-------------|";
+                else if (car == 3) cout << "|-|_________|-|";
+                else if (car == 4) cout << " '============='";
+            }
+            // LINE 6: Wheels
+            else if (line == 6) {
+                if (car == 1)      cout << "(o) (o) (o) (o)";
+                else if (car == 2) cout << "   (o)     (o) ";
+                else if (car == 3) cout << "   (o)     (o) ";
+                else if (car == 4) cout << "   (o)     (o) ";
+            }
+
+            // Connector between cars: "--" at chassis line (line 5), spaces otherwise
+            if (pos < 4) {
+                if (line == 5) {
+                    cout << "--";
+                } else {
+                    cout << "  ";}}}
+        cout << "\n";}}}}
+            
+break;
 
         case 6:
            
