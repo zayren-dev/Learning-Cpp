@@ -271,21 +271,21 @@ int main(){
     // finding K
     long long telemetryKey_K = (v_int * 1000000LL) + (F1 * 10000LL) + (F2 * 100LL) + rolloffset_R;
 
-    // synthesizing status_tags
+    
     int recoveredR = static_cast<int>(telemetryKey_K % 100);
     char first_tag  = static_cast<char>('A' + (v_int % 26));
     char second_tag = static_cast<char>('Z' - (recoveredR % 26));
 
-    // reconstructing original velocity from parsed components
+    
     float  vFloat  = v_int + F1 / 100.0f + F2 / 10000.0f;
     double vDouble = v_int + F1 / 100.0  + F2 / 10000.0;
 
-    // precision match indicator
+    
     int exactmatch = static_cast<int>(vFloat == vDouble);
 
     int penalty = 25 * (1 - exactmatch);
     int threat = static_cast<int>(recoveredR + penalty + 1.5 * vDouble);
-    // output
+    
     cout << fixed << setprecision(4);
     cout << "ΔV: " << delta_velocity << endl;
     cout << "Telemetry Key K: " << telemetryKey_K << endl;
@@ -294,11 +294,6 @@ int main(){
     cout << "Threat Rating: " << threat << endl; }
 
     break;
-
-
-
-
-
 
     case 3: {
     int murVisitedBoilerRoom = 1, murVisitedCargoHold = 0, murVisitedThirdClass = 0,
@@ -980,37 +975,11 @@ int main(){
 
 
 case 6:
-       {int matrixRadius;
-    cout << "Initialize Silent Containment Matrix Radius (e.g., 8, 12, 16): ";
-    cin >> matrixRadius;
-
-    int halfRows = matrixRadius / 2;
-
-    for (int currentRow = 0; currentRow <= halfRows; currentRow++) {
-        for (int spaces = 0; spaces < halfRows - currentRow; spaces++) {
-            cout << " ";
-        }
-        for (int symbols = 0; symbols < (2 * currentRow + 1); symbols++) {
-            cout << "X";
-        }
-        cout << endl;
-    }
-
-    for (int currentRow = halfRows - 1; currentRow >= 0; currentRow--) {
-        for (int spaces = 0; spaces < halfRows - currentRow; spaces++) {
-            cout << " ";
-        }
-        for (int symbols = 0; symbols < (2 * currentRow + 1); symbols++) {
-            cout << "X";
-        }
-        cout << endl;}}
+       {}
 break;
 
 
-
-
-
-    case 7:
+case 7:
            {
     long long numA, numB;
     char choice;
