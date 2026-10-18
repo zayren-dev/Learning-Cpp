@@ -960,7 +960,7 @@ int main(){
  case 6:
 {
     int radius;
-    cout << "\033[Initialize Silent Containment Matrix Radius (e.g., 8, 12, 16):";
+    cout << "Initialize Silent Containment Matrix Radius (e.g., 8, 12, 16):";
     cin >> radius;
     cout << endl;
     int halfHeight    = radius * 3 / 2;               
@@ -995,7 +995,7 @@ int main(){
             else
                 cout << ' ';
         }
-        cout << "\033[0m" << endl;
+        cout << "" << endl;
     }}
 break;
 
