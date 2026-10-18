@@ -6,147 +6,132 @@
 using namespace std;
 
 int main() {
-    // Board dimensions: Width = 20, Height = 10[cite: 1]
-    // Initial random positions[cite: 1]
     srand(time(0));
-    int pacX = rand() % 20;
-    int pacY = rand() % 10;
     
-    // Blinky: starts at height 3 from top (y = 3), moving right[cite: 1]
-    int blinkyX = rand() % 20;
-    int blinkyY = 3;
-    int blinkyDirection = 1; // 1 for right, -1 for left[cite: 1]
-    int blinkyState = 0;     // 0 for top track, 1 for bottom track[cite: 1]
+    // Simple short variables like a student would write
+    int px = rand() % 20;
+    int py = rand() % 10;
     
-    int pinkyX = rand() % 20;
-    int pinkyY = rand() % 10;
+    int bx = rand() % 20;
+    int by = 3;
+    int bdir = 1;
+    int btrack = 0;
     
-    int inkyX = rand() % 20;
-    int inkyY = rand() % 10;
+    int pinkx = rand() % 20;
+    int pinky = rand() % 10;
     
-    int clydeX = rand() % 20;
-    int clydeY = rand() % 10;
+    int inkyx = rand() % 20;
+    int inkyy = rand() % 10;
     
-    char playerInput;
-    int gameRunning = 1;
-
-    while (gameRunning) {
-        // 1. Draw the board using nested loops and ternary operators (no if-else)[cite: 1]
-        cout << "\n================ PAC-A-MAN ================\n";
-        for (int y = 0; y < 10; ++y) {
-            for (int x = 0; x < 20; ++x) {
-                char cellChar = (x == pacX && y == pacY) ? '@' :
-                                ((x == blinkyX && y == blinkyY) ? 'B' :
-                                ((x == pinkyX && y == pinkyY) ? 'P' :
-                                ((x == inkyX && y == inkyY) ? 'I' :
-                                ((x == clydeX && y == clydeY) ? 'C' : '*'))));
-                cout << cellChar;
+    int clydex = rand() % 20;
+    int clydey = rand() % 10;
+    
+    char moveInput;
+    int gameOn = 1;
+    
+    while (gameOn) {
+        // Draw grid using simple step-by-step ternary assignments
+        cout << "\n----------------------- Board -----------------------\n";
+        int row = 0;
+        while (row < 10) {
+            int col = 0;
+            while (col < 20) {
+                char symbol = '*';
+                symbol = (col == px && row == py) ? '@' : symbol;
+                symbol = (col == bx && row == by) ? 'B' : symbol;
+                symbol = (col == pinkx && row == pinky) ? 'P' : symbol;
+                symbol = (col == inkyx && row == inkyy) ? 'I' : symbol;
+                symbol = (col == clydex && row == clydey) ? 'C' : symbol;
+                cout << symbol;
+                col++;
             }
             cout << "\n";
+            row++;
         }
-
-        // 2. Check win/loss conditions[cite: 1]
-        int clydeMet = (pacX == clydeX && pacY == clydeY) ? 1 : 0;
-        int blinkyCaught = (pacX == blinkyX && pacY == blinkyY) ? 1 : 0;
-        int pinkyCaught = (pacX == pinkyX && pacY == pinkyY) ? 1 : 0;
-        int inkyCaught = (pacX == inkyX && pacY == inkyY) ? 1 : 0;
-
-        int isGameOver = clydeMet | blinkyCaught | pinkyCaught | inkyCaught;
-        gameRunning = (isGameOver == 1) ? 0 : 1;
-
-        // Display status message using ternary operator
-        cout << ((clydeMet == 1) ? "Clyde reached Pac-Man! Ghostbusters called, you win!\n" :
-                 ((blinkyCaught == 1 || pinkyCaught == 1 || inkyCaught == 1) ? "A ghost caught Pac-Man! Game Over.\n" : ""));
-
-        // Terminate loop if game ended
-        gameRunning = (isGameOver == 1) ? 0 : gameRunning;
-        int shouldContinue = (gameRunning == 0) ? 0 : 1;
         
-        // Exit loop early if game over
-        char continuePromptChar = (shouldContinue == 1) ? 'y' : 'n';
-        // (Using standard loop termination via gameRunning variable)
-        if (gameRunning == 0) {
+        // Collision checks
+        int touchClyde = (px == clydex && py == clydey) ? 1 : 0;
+        int touchBlinky = (px == bx && py == by) ? 1 : 0;
+        int touchPinky = (px == pinkx && py == pinky) ? 1 : 0;
+        int touchInky = (px == inkyx && py == inkyy) ? 1 : 0;
+        
+        int anyTouch = touchClyde | touchBlinky | touchPinky | touchInky;
+        gameOn = (anyTouch == 1) ? 0 : 1;
+        
+        // Status print using basic ternary
+        char printMsg = (touchClyde == 1)? cout << "Clyde reached! You Win!\n" : ((touchBlinky == 1 || touchPinky == 1 || touchInky == 1) ? cout << "Caught by ghost! Game Over.\n" : cout << "");
+                        
+        gameOn = (anyTouch == 1) ? 0 : gameOn;
+        if (gameOn == 0) {
             break;
         }
-
-        // 3. Take Pac-Man input (WASD)[cite: 1]
-        cout << "Enter move (W/A/S/D or Q to quit): ";
-        cin >> playerInput;
-
-        int prevPacX = pacX;
-        int prevPacY = pacY;
-
-        // Switch case for Pac-Man movement (no if-else)[cite: 1]
-        switch (playerInput) {
+        
+        // Take input
+        cout << "Enter control (W/A/S/D): ";
+        cin >> moveInput;
+        
+        int oldPx = px;
+        int oldPy = py;
+        
+        // Switch case for movement
+        switch (moveInput) {
             case 'w':
             case 'W':
-                pacY = (pacY > 0) ? pacY - 1 : pacY;
+                py = (py > 0) ? py - 1 : py;
                 break;
             case 's':
             case 'S':
-                pacY = (pacY < 9) ? pacY + 1 : pacY;
+                py = (py < 9) ? py + 1 : py;
                 break;
             case 'a':
             case 'A':
-                pacX = (pacX > 0) ? pacX - 1 : pacX;
+                px = (px > 0) ? px - 1 : px;
                 break;
             case 'd':
             case 'D':
-                pacX = (pacX < 19) ? pacX + 1 : pacX;
+                px = (px < 19) ? px + 1 : px;
                 break;
             case 'q':
             case 'Q':
-                gameRunning = 0;
+                gameOn = 0;
                 break;
             default:
                 break;
         }
-
-        // 4. Check each ghost's logic and update movement in order: Clyde, Inky, Pinky, Blinky[cite: 1]
-
-        // --- Clyde Logic ---
-        int pacDeltaX = pacX - prevPacX;
-        int pacDeltaY = pacY - prevPacY;
-        int proposedClydeX = clydeX + pacDeltaX;
-        int proposedClydeY = clydeY + pacDeltaY;
-        clydeX = (proposedClydeX >= 0 && proposedClydeX < 20) ? proposedClydeX : clydeX;
-        clydeY = (proposedClydeY >= 0 && proposedClydeY < 10) ? proposedClydeY : clydeY;
-
-        // --- Inky Logic ---
-        double distBlinky = pow(pacX - blinkyX, 2) + pow(pacY - blinkyY, 2);
-        double distPinky = pow(pacX - pinkyX, 2) + pow(pacY - pinkyY, 2);
-        double distClyde = pow(pacX - clydeX, 2) + pow(pacY - clydeY, 2);
-        double distInky = pow(pacX - inkyX, 2) + pow(pacY - inkyY, 2);
-
-        int isInkyClosest = (distInky <= distBlinky && distInky <= distPinky && distInky <= distClyde) ? 1 : 0;
-        int inkyTeleportX = pacX;
-        int inkyTeleportY = (pacY > 0) ? pacY - 1 : pacY;
         
-        inkyX = (isInkyClosest == 1) ? inkyTeleportX : inkyX;
-        inkyY = (isInkyClosest == 1) ? inkyTeleportY : inkyY;
-
-        // --- Pinky Logic ---
-        int pinkyDeltaX = (pacX > pinkyX) ? 1 : ((pacX < pinkyX) ? -1 : 0);
-        int pinkyDeltaY = (pacY > pinkyY) ? 1 : ((pacY < pinkyY) ? -1 : 0);
+        // Clyde Movement
+        int moveX = px - oldPx;
+        int moveY = py - oldPy;
+        int tempClydeX = clydex + moveX;
+        int tempClydeY = clydey + moveY;
+        clydex = (tempClydeX >= 0 && tempClydeX < 20) ? tempClydeX : clydex;
+        clydey = (tempClydeY >= 0 && tempClydeY < 10) ? tempClydeY : clydey;
         
-        int proposedPinkyX = pinkyX + pinkyDeltaX;
-        int proposedPinkyY = pinkyY + pinkyDeltaY;
-        pinkyX = (proposedPinkyX >= 0 && proposedPinkyX < 20) ? proposedPinkyX : pinkyX;
-        pinkyY = (proposedPinkyY >= 0 && proposedPinkyY < 10) ? proposedPinkyY : pinkyY;
-
-        // --- Blinky Logic ---
-        blinkyState = (blinkyX == 19 && blinkyDirection == 1 && blinkyY == 3) ? 1 : 
-                      ((blinkyX == 0 && blinkyDirection == -1 && blinkyY == 6) ? 0 : blinkyState);
-                      
-        blinkyY = (blinkyState == 1 && blinkyY == 3 && blinkyX == 19) ? 6 :
-                  ((blinkyState == 0 && blinkyY == 6 && blinkyX == 0) ? 3 : blinkyY);
-                  
-        blinkyDirection = (blinkyX == 19 && blinkyDirection == 1) ? -1 :
-                          ((blinkyX == 0 && blinkyDirection == -1) ? 1 : blinkyDirection);
-                          
-        blinkyX = blinkyX + blinkyDirection;
+        // Inky Movement
+        double distB = pow(px - bx, 2) + pow(py - by, 2);
+        double distP = pow(px - pinkx, 2) + pow(py - pinky, 2);
+        double distC = pow(px - clydex, 2) + pow(py - clydey, 2);
+        double distI = pow(px - inkyx, 2) + pow(py - inkyy, 2);
+        
+        int inkyClosest = (distI <= distB && distI <= distP && distI <= distC) ? 1 : 0;
+        inkyps: 
+        inkyx = (inkyClosest == 1) ? px : inkyx;
+        inkyy = (inkyClosest == 1 && py > 0) ? py - 1 : inkyy;
+        
+        // Pinky Movement
+        int stepX = (px > pinkx) ? 1 : ((px < pinkx) ? -1 : 0);
+        int stepY = (py > pinky) ? 1 : ((py < pinky) ? -1 : 0);
+        int nextPinkX = pinkx + stepX;
+        int nextPinkY = pinky + stepY;
+        pinkx = (nextPinkX >= 0 && nextPinkX < 20) ? nextPinkX : pinkx;
+        pinky = (nextPinkY >= 0 && nextPinkY < 10) ? nextPinkY : pinky;
+        
+        // Blinky Movement
+        btrack = (bx == 19 && bdir == 1 && by == 3) ? 1 : ((bx == 0 && bdir == -1 && by == 6) ? 0 : btrack);
+        by = (btrack == 1 && by == 3 && bx == 19) ? 6 : ((btrack == 0 && by == 6 && bx == 0) ? 3 : by);
+        bdir = (bx == 19 && bdir == 1) ? -1 : ((bx == 0 && bdir == -1) ? 1 : bdir);
+        bx = bx + bdir;
     }
-
-    cout << "\nGame execution finished successfully.\n";
+    
     return 0;
 }
