@@ -235,7 +235,7 @@ int main(){
 
 
 
-    
+
     case 2:
     {
             
@@ -1257,7 +1257,8 @@ break;
     
     
     
-            case 8: { srand(time(0));
+            case 8:
+    { srand(time(0));
     int px = rand() % 20;
     int py = rand() % 10;
     
@@ -1362,17 +1363,17 @@ break;
         btrack = (gameOn == 1 && bx == 19 && bdir == 1 && by == 3) ? 1 : ((gameOn == 1 && bx == 0 && bdir == -1 && by == 6) ? 0 : btrack);
         by = (gameOn == 1 && btrack == 1 && by == 3 && bx == 19) ? 6 : ((gameOn == 1 && btrack == 0 && by == 6 && bx == 0) ? 3 : by);
         bdir = (gameOn == 1 && bx == 19 && bdir == 1) ? -1 : ((gameOn == 1 && bx == 0 && bdir == -1) ? 1 : bdir);
-        bx = (gameOn == 1) ? (bx + bdir) : bx;}
+        bx = (gameOn == 1) ? (bx + bdir) : bx;}}
             
     break;
 
-    case 0:
-        cout << "Exiting program..." << endl;
+    case 0: {
+        cout << "Exiting program..." << endl;}
     break;
 
     
-    default:
-        cout << "Invalid choice. Please select a number from 0 to 8." << endl;
+    default: {
+        cout << "Invalid choice. Please select a number from 0 to 8." << endl;}
     break;
 
     }
