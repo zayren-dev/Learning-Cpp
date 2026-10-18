@@ -980,7 +980,30 @@ int main(){
 
 
 case 6:
-       {}
+       {int matrixRadius;
+    cout << "Initialize Silent Containment Matrix Radius (e.g., 8, 12, 16): ";
+    cin >> matrixRadius;
+
+    int halfRows = matrixRadius / 2;
+
+    for (int currentRow = 0; currentRow <= halfRows; currentRow++) {
+        for (int spaces = 0; spaces < halfRows - currentRow; spaces++) {
+            cout << " ";
+        }
+        for (int symbols = 0; symbols < (2 * currentRow + 1); symbols++) {
+            cout << "X";
+        }
+        cout << endl;
+    }
+
+    for (int currentRow = halfRows - 1; currentRow >= 0; currentRow--) {
+        for (int spaces = 0; spaces < halfRows - currentRow; spaces++) {
+            cout << " ";
+        }
+        for (int symbols = 0; symbols < (2 * currentRow + 1); symbols++) {
+            cout << "X";
+        }
+        cout << endl;}}
 break;
 
 
