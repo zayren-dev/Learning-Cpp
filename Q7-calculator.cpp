@@ -44,9 +44,8 @@ int main() {
             if (round == 1) {
                 int total = bit1 + bit2 + carryOrBorrow;
                 answerBit = total % 2;         
-                carryOrBorrow = total / 2;       
-            } else {
-                
+                carryOrBorrow = total / 2;} 
+                else {
                 int total = bit1 - bit2 - carryOrBorrow;
                 if (total < 0) {                
                     total = total + 2;
@@ -54,12 +53,10 @@ int main() {
                 } else {
                     carryOrBorrow = 0;
                 }
-                answerBit = total;
-            }
-
+                answerBit = total;}
             result = result + answerBit * place;
-            place = place * 10;
-        }
+            place = place * 10; }
+
         int bit6 = (result / 1000000) % 10;
         int bit5 = (result / 100000) % 10;
         bool overflow;
@@ -68,19 +65,16 @@ int main() {
 
         if (round == 1)      { sumBits = result;   sumOverflow = overflow; }
         else if (round == 2) { diff1Bits = result; diff1Overflow = overflow; }
-        else                 { diff2Bits = result; diff2Overflow = overflow; }
-    }
+        else                 { diff2Bits = result; diff2Overflow = overflow; }}
 
     long long shiftedA = numA;   
     long long bigB = numB;     
     if (isSigned && signA == 1) {
         long long fillPlace = 1000000;
-        for (int i = 6; i < 12; i++) { shiftedA = shiftedA + fillPlace; fillPlace = fillPlace * 10; }
-    }
+        for (int i = 6; i < 12; i++) { shiftedA = shiftedA + fillPlace; fillPlace = fillPlace * 10; }}
     if (isSigned && signB == 1) {
         long long fillPlace = 1000000;
-        for (int i = 6; i < 12; i++) { bigB = bigB + fillPlace; fillPlace = fillPlace * 10; }
-    }
+        for (int i = 6; i < 12; i++) { bigB = bigB + fillPlace; fillPlace = fillPlace * 10; }}
 
     long long product = 0;
     long long bPlace = 1;  
@@ -95,13 +89,10 @@ int main() {
                 int total = (product / place) % 10 + (shiftedA / place) % 10 + carry;
                 newProduct = newProduct + (total % 2) * place;
                 carry = total / 2;
-                place = place * 10;
-            }
-            product = newProduct;
-        }
+                place = place * 10;}
+            product = newProduct;}
         shiftedA = (shiftedA * 10) % 1000000000000LL;
-        bPlace = bPlace * 10;
-    }
+        bPlace = bPlace * 10;}
     long long quotient = 0, remainder = 0;
     bool divideByZero = (numB == 0);
 
@@ -121,12 +112,9 @@ int main() {
                     int total = (1 - (original / place) % 10) + carry;
                     negated = negated + (total % 2) * place;
                     carry = total / 2;
-                    place = place * 10;
-                }
+                    place = place * 10;}
                 if (who == 1) { absA = negated; aNegative = true; }
-                else          { absB = negated; bNegative = true; }
-            }
-        }
+                else          { absB = negated; bNegative = true; }}}
         remainder = absA;
         while (remainder >= absB) {
             long long smaller = 0, place = 1;
@@ -136,8 +124,7 @@ int main() {
                 if (total < 0) { total = total + 2; borrow = 1; }
                 else           { borrow = 0; }
                 smaller = smaller + total * place;
-                place = place * 10;
-            }
+                place = place * 10;}
             remainder = smaller;
             long long bigger = 0;
             place = 1;
@@ -146,17 +133,14 @@ int main() {
                 int total = (quotient / place) % 10 + carry;
                 bigger = bigger + (total % 2) * place;
                 carry = total / 2;
-                place = place * 10;
-            }
-            quotient = bigger;
-        }
+                place = place * 10;}
+            quotient = bigger;}
         for (int who = 1; who <= 2; who++) {
             long long toFix = quotient;
             bool needsNegate = (aNegative != bNegative);
             if (who == 2) {
                 toFix = remainder;
-                needsNegate = aNegative;
-            }
+                needsNegate = aNegative;}
             if (needsNegate) {
                 long long negated = 0, place = 1;
                 int carry = 1;
@@ -164,8 +148,7 @@ int main() {
                     int total = (1 - (toFix / place) % 10) + carry;
                     negated = negated + (total % 2) * place;
                     carry = total / 2;
-                    place = place * 10;
-                }
+                    place = place * 10;}
                 if (who == 1) quotient = negated;
                 else          remainder = negated;}}}
     int decA = 0, decB = 0, decSum = 0, decDiff1 = 0;
@@ -182,12 +165,10 @@ int main() {
         else if (item == 2) value = numB;
         else if (item == 3) {
             if (sumOverflow) { value = sumBits; bits = 7; }
-            else value = sumBits % 1000000;
-        }
+            else value = sumBits % 1000000;}
         else if (item == 4) {
             if (diff1Overflow) { value = diff1Bits; bits = 7; readSigned = true; }
-            else value = diff1Bits % 1000000;
-  }
+            else value = diff1Bits % 1000000;}
         else if (item == 5) {
             if (diff2Overflow) { value = diff2Bits; bits = 7; readSigned = true; }
             else value = diff2Bits % 1000000;}
@@ -206,8 +187,7 @@ int main() {
         if (readSigned && leftmostBit == 1) {
             int range = 1;
             for (int i = 0; i < bits; i++) range = range * 2;
-            decimalValue = decimalValue - range;
-        }
+            decimalValue = decimalValue - range;}
         if (item == 1)      decA = decimalValue;
         else if (item == 2) decB = decimalValue;
         else if (item == 3) { decSum = decimalValue;   sumShown = value;   sumSeven = (bits == 7); }
@@ -215,8 +195,7 @@ int main() {
         else if (item == 5) { decDiff2 = decimalValue; diff2Shown = value; diff2Seven = (bits == 7); }
         else if (item == 6) decProduct = decimalValue;
         else if (item == 7) decQuotient = decimalValue;
-        else                decRemainder = decimalValue;
-    }
+        else decRemainder = decimalValue;}
     cout << "A : " << decA << endl;
     cout << "B : " << decB << endl;
     cout << "A + B = ";
@@ -269,8 +248,8 @@ int main() {
 
     if (divideByZero) {
         cout << "A / B = undefined (division by zero)" << endl;
-        cout << "A % B = undefined (division by zero)" << endl;
-    } else {
+        cout << "A % B = undefined (division by zero)" << endl;} 
+        else {
         cout << "A / B = ";
         if (quotient < 100000) cout << zero;
         if (quotient < 10000)  cout << zero;
