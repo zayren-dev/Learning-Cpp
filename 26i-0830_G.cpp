@@ -231,6 +231,11 @@ int main(){
     }
     break;
 
+
+
+
+
+    
     case 2:
     {
             
@@ -289,6 +294,11 @@ int main(){
     cout << "Threat Rating: " << threat << endl; }
 
     break;
+
+
+
+
+
 
     case 3: {
     int murVisitedBoilerRoom = 1, murVisitedCargoHold = 0, murVisitedThirdClass = 0,
@@ -806,6 +816,10 @@ int main(){
     }
     break;
 
+
+
+
+
     case 4: {
     int size;
     cout << "Enter size: ";
@@ -861,6 +875,10 @@ int main(){
         }
         cout << endl;}}
     break;
+
+
+
+
 
     case 5:{
     int choice5;
@@ -957,9 +975,17 @@ int main(){
                         else          cout << "  ";}}}
         cout << "\n";}
         break;}}}
- case 6:
-{}
+
+
+
+
+case 6:
+       {}
 break;
+
+
+
+
 
     case 7:
            {
@@ -1348,7 +1374,7 @@ break;
     default:
         cout << "Invalid choice. Please select a number from 0 to 8." << endl;
     break;
-    
+
     }
 
     return 0; }
