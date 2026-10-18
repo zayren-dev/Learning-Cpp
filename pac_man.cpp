@@ -58,13 +58,9 @@ int main() {
         int anyTouch = touchClyde | touchBlinky | touchPinky | touchInky;
         gameOn = (anyTouch == 1) ? 0 : 1;
         
-        // Status print using basic ternary
-        char printMsg = (touchClyde == 1)? cout << "Clyde reached! You Win!\n" : ((touchBlinky == 1 || touchPinky == 1 || touchInky == 1) ? cout << "Caught by ghost! Game Over.\n" : cout << "");
-                        
-        gameOn = (anyTouch == 1) ? 0 : gameOn;
-        if (gameOn == 0) {
-            break;
-        }
+      // Status print using correct ternary strings (no cout inside ternary)
+        cout << ((touchClyde == 1) ? "Clyde reached! You Win!\n" : 
+                 ((touchBlinky == 1 || touchPinky == 1 || touchInky == 1) ? "Caught by ghost! Game Over.\n" : ""));
         
         // Take input
         cout << "Enter control (W/A/S/D): ";
