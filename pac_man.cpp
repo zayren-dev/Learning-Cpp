@@ -49,9 +49,8 @@ int main() {
         int touchBlinky = (px == bx && py == by) ? 1 : 0;
         int touchPinky = (px == pinkx && py == pinky) ? 1 : 0;
         int touchInky = (px == inkyx && py == inkyy) ? 1 : 0;
-        
-        int anyTouch = touchClyde | touchBlinky | touchPinky | touchInky;
-        gameOn = (anyTouch == 1) ? 0 : 1;
+        int anyTouch = touchClyde + touchBlinky + touchPinky + touchInky;
+        gameOn = (anyTouch > 0) ? 0 : 1;
         
         cout << ((touchClyde == 1) ? "Clyde reached! You Win!\n" : 
                  ((touchBlinky == 1 || touchPinky == 1 || touchInky == 1) ? "Caught by ghost! Game Over.\n" : ""));
