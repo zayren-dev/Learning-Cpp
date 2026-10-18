@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     int radius;
-    cout << "Initialize Silent Containment Matrix Radius (e.g., 8, 12, 16): ";
+    cout << "\033[96mInitialize Silent Containment Matrix Radius (e.g., 8, 12, 16): \033[0m";
     cin >> radius;
     cout << endl;
 
