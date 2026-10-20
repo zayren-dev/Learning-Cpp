@@ -10,7 +10,7 @@ int main()
     cin >> radius;
     cout << endl;
 
-    // ---------- every measurement grows from the one number the user typed ----------
+    
     int halfHeight    = radius * 3 / 2;               
     int reachSideways = 3 * radius;                   // how far the middle line stretches left / right
     int diamondLimit  = 3 * radius + 1;               // |x| + 2|y| must stay inside this to be in the diamond
