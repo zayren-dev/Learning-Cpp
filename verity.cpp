@@ -30,7 +30,7 @@ int main()
     double ringRadius   = radius / 2.0;
     double strokeHalf   = 0.25 + radius / 24.0;       // half of the stroke thickness
     double eyeOffset    = radius * 5 / 24.0;          // how far each eye sits from the centre line
-    int    eyeHeight    = radius / 4;                 // how many rows each eye climbs above the middle
+    int    eyeHeight    = radius / 4;                
     double mouthCentreY = radius / 3.0;
     double mouthRadius  = radius * 3 / 16.0;
     double smileRadius  = ringRadius + 2.5;
