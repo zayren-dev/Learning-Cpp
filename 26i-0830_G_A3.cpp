@@ -367,63 +367,40 @@ int main(){
     case 5:
     {
          char symbol;
-    int digit;
-    long long rowValue;
+         int digit;
+         long long rowValue;
+         cin >> mineSize;
+         for (int r = 0; r < mineSize; r++){
+              rowValue = 0;
+              for (int c = 0; c < mineSize; c++){
+                  cin >> symbol;
+                  if (symbol == '.') digit = 0;
+                  if (symbol == '*') digit = 1;
+                  if (symbol == 'G') digit = 2;
+                  if (symbol == 'S') digit = 8;
+                  if (symbol == 'E') digit = 4;
+                  rowValue = rowValue * 10 + digit;}
+             mineSetRow(r, rowValue);}
 
-    cin >> mineSize;
-
-    // Mine parhna aur rows mein save karna
-    for (int r = 0; r < mineSize; r++)
-    {
-        rowValue = 0;
-        for (int c = 0; c < mineSize; c++)
-        {
-            cin >> symbol;
-            if (symbol == '.') digit = 0;
-            if (symbol == '*') digit = 1;
-            if (symbol == 'G') digit = 2;
-            if (symbol == 'S') digit = 8;   // S pehle se pohanch wala hai (3 + 5)
-            if (symbol == 'E') digit = 4;
-            rowValue = rowValue * 10 + digit;
-        }
-        mineSetRow(r, rowValue);
-    }
-
-    // Jab tak naye cell milte rahein, phailte jao
-    int found = 1;
-    while (found == 1)
-    {
-        found = 0;
-        for (int r = 0; r < mineSize; r++)
-        {
-            for (int c = 0; c < mineSize; c++)
-            {
-                if (mineGetCell(r, c) >= 5)
-                {
-                    if (mineVisit(r - 1, c) == 1) found = 1;   // upar
-                    if (mineVisit(r + 1, c) == 1) found = 1;   // neeche
-                    if (mineVisit(r, c - 1) == 1) found = 1;   // left
-                    if (mineVisit(r, c + 1) == 1) found = 1;   // right
-                }
-            }
-        }
-    }
-
-    // Gold gino aur exit dekho
-    int goldCount = 0;
-    int exitReached = 0;
-    for (int r = 0; r < mineSize; r++)
-    {
-        for (int c = 0; c < mineSize; c++)
-        {
-            if (mineGetCell(r, c) == 7) goldCount++;
-            if (mineGetCell(r, c) == 9) exitReached = 1;
-        }
-    }
-
-    if (exitReached == 1) cout << "Solvable: YES" << endl;
-    else cout << "Solvable: NO" << endl;
-    cout << "Gold reachable: " << goldCount << endl;
+        int found = 1;
+        while (found == 1){
+              found = 0;
+              for (int r = 0; r < mineSize; r++){
+                  for (int c = 0; c < mineSize; c++){
+                      if (mineGetCell(r, c) >= 5){
+                         if (mineVisit(r - 1, c) == 1) found = 1;   
+                         if (mineVisit(r + 1, c) == 1) found = 1;   
+                         if (mineVisit(r, c - 1) == 1) found = 1; 
+                         if (mineVisit(r, c + 1) == 1) found = 1;}}}}
+        int goldCount = 0;
+        int exitReached = 0;
+        for (int r = 0; r < mineSize; r++){
+            for (int c = 0; c < mineSize; c++){
+                if (mineGetCell(r, c) == 7) goldCount++;
+                if (mineGetCell(r, c) == 9) exitReached = 1;}}
+        if (exitReached == 1) cout << "Solvable: YES" << endl;
+        else cout << "Solvable: NO" << endl;
+        cout << "Gold reachable: " << goldCount << endl;
 break;}
     case 0: {
         cout << "Exiting program..." << endl;}
