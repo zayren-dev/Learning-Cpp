@@ -198,17 +198,61 @@ int main(){
     break;}
 
 
-    case 3: {
+    case 3: 
+    {
+        int n;
 
-
-
-
-
-
-
-
-        
+    // ---------- Input lena (sirf for loop use karna hai) ----------
+    cout << "Enter n: ";
+    cin >> n;
+    for ( ; n <= 2 || n % 2 == 0; )
+    {
+        cout << "n must be greater than 2 and it can not be even." << endl;
+        cout << "Enter n: ";
+        cin >> n;
     }
+
+    int middleRow = n - 1;        // beech wali row (rows 0 se ginte hain)
+    int totalRows = 2 * n - 1;    // pattern mein kul rows
+
+    for (int row = 0; row < totalRows; row++)
+    {
+        // yeh row beech wali row se kitni door hai
+        int rowGap = row - middleRow;
+        if (rowGap < 0)
+            rowGap = -rowGap;
+
+        // door hone ke hisaab se utni spaces aage chhodte hain
+        for (int space = 1; space <= rowGap; space++)
+            cout << " ";
+
+        // is row mein beech se left aur right kitne characters aayenge
+        int reach = middleRow - rowGap;
+
+        for (int col = -reach; col <= reach; col++)
+        {
+            // yeh character beech wale column se kitna door hai
+            int colGap = col;
+            if (colGap < 0)
+                colGap = -colGap;
+
+            // beech wale point se kul doori (upar/neeche + left/right)
+            int distance = rowGap + colGap;
+
+            // characters ka cycle:  *  -  o  .  (phir dobara * se)
+            int turn = distance % 4;
+            if (turn == 0)
+                cout << "*";
+            else if (turn == 1)
+                cout << "-";
+            else if (turn == 2)
+                cout << "o";
+            else
+                cout << ".";
+        }
+        cout << endl;
+    }
+    break;}
     case 0: {
         cout << "Exiting program..." << endl;}
     break;
