@@ -203,12 +203,10 @@ int main(){
         int n;
         cout << "Enter n: ";
         cin >> n;
-    for ( ; n <= 2 || n % 2 == 0; )
-    {
-        cout << "n must be greater than 2 and it can not be even." << endl;
-        cout << "Enter n: ";
-        cin >> n;
-    }
+        for ( ; n <= 2 || n % 2 == 0; ){
+            cout << "n must be greater than 2 and it can not be even." << endl;
+            cout << "Enter n: ";
+            cin >> n;}
 
     int middleRow = n - 1;        // beech wali row (rows 0 se ginte hain)
     int totalRows = 2 * n - 1;    // pattern mein kul rows
