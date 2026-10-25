@@ -401,7 +401,11 @@ int main(){
         if (exitReached == 1) cout << "Solvable: YES" << endl;
         else cout << "Solvable: NO" << endl;
         cout << "Gold reachable: " << goldCount << endl;
-break;}
+    
+    
+    break;}
+
+    
     case 0: {
         cout << "Exiting program..." << endl;}
     break;
