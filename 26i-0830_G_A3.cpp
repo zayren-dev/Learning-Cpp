@@ -201,8 +201,8 @@ int main(){
     case 3: 
     {
         int n;
-    cout << "Enter n: ";
-    cin >> n;
+        cout << "Enter n: ";
+        cin >> n;
     for ( ; n <= 2 || n % 2 == 0; )
     {
         cout << "n must be greater than 2 and it can not be even." << endl;
