@@ -256,31 +256,21 @@ int main(){
     case 4: 
     {
         int n, base, seed;
+        cout << "N: "; cin >> n;
+        while (n < 1){
+              cout << "N must be 1 or more." << endl;
+              cout << "N: "; cin >> n;}
 
-    cout << "N: ";
-    cin >> n;
-    while (n < 1)
-    {
-        cout << "N must be 1 or more." << endl;
-        cout << "N: ";
-        cin >> n;
-    }
-
-    cout << "Base: ";
-    cin >> base;
-    while (base < 2 || base > 16)
-    {
-        cout << "Base must be between 2 and 16." << endl;
         cout << "Base: ";
         cin >> base;
-    }
-
-    cout << "Seed: ";
-    cin >> seed;
-    cout << endl;
-
-    int middle = n - 1;        // beech wali row/column ka number
-    int last = 2 * n - 2;      // aakhri row/column ka number
+        while (base < 2 || base > 16){
+              cout << "Base must be between 2 and 16." << endl;
+              cout << "Base: ";
+              cin >> base;}
+        cout << "Seed: "; cin >> seed;
+        cout << endl;
+        int middle = n - 1;        
+        int last = 2 * n - 2;     
 
     for (int row = 0; row <= last; row++)
     {
