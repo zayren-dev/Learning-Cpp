@@ -201,8 +201,6 @@ int main(){
     case 3: 
     {
         int n;
-
-    // ---------- Input lena (sirf for loop use karna hai) ----------
     cout << "Enter n: ";
     cin >> n;
     for ( ; n <= 2 || n % 2 == 0; )
