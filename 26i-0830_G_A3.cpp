@@ -29,6 +29,23 @@ int daysInMonth(int month, int year)
     else
         return 31;
 }
+// question 4 ky functions
+int ringJump(int ring, int base)
+{
+    int total = 0;
+    int addNow = 1;
+    int addNext = 1;
+
+    for (int i = 1; i <= ring; i++)
+    {
+        total = (total + addNow) % base;
+        int temp = (addNow + addNext) % base;
+        addNow = addNext;
+        addNext = temp;
+    }
+    return total;
+}
+
 
 int main(){
     int choice;
@@ -207,47 +224,113 @@ int main(){
             cout << "n must be greater than 2 and it can not be even." << endl;
             cout << "Enter n: ";
             cin >> n;}
+        int middleRow = n - 1;        
+        int totalRows = 2 * n - 1;    
 
-    int middleRow = n - 1;        // beech wali row (rows 0 se ginte hain)
-    int totalRows = 2 * n - 1;    // pattern mein kul rows
+        for (int row = 0; row < totalRows; row++){
+             int rowGap = row - middleRow;
+             if (rowGap < 0)
+                rowGap = -rowGap;
+             for (int space = 1; space <= rowGap; space++)
+                 cout << " ";
+             int reach = middleRow - rowGap;
+             for (int col = -reach; col <= reach; col++){
+                  int colGap = col;
+                  if (colGap < 0)
+                     colGap = -colGap;
+                  int distance = rowGap + colGap;
+                  int turn = distance % 4;
+                  if (turn == 0)
+                     cout << "*";
+                  else if (turn == 1)
+                     cout << "-";
+                  else if (turn == 2)
+                     cout << "o";
+                  else
+                     cout << ".";}
+            cout << endl;}
+    break;}
 
-    for (int row = 0; row < totalRows; row++)
+
+
+    case 4: 
     {
-        // yeh row beech wali row se kitni door hai
-        int rowGap = row - middleRow;
-        if (rowGap < 0)
-            rowGap = -rowGap;
+        int n, base, seed;
 
-        // door hone ke hisaab se utni spaces aage chhodte hain
-        for (int space = 1; space <= rowGap; space++)
-            cout << " ";
+    cout << "N: ";
+    cin >> n;
+    while (n < 1)
+    {
+        cout << "N must be 1 or more." << endl;
+        cout << "N: ";
+        cin >> n;
+    }
 
-        // is row mein beech se left aur right kitne characters aayenge
-        int reach = middleRow - rowGap;
+    cout << "Base: ";
+    cin >> base;
+    while (base < 2 || base > 16)
+    {
+        cout << "Base must be between 2 and 16." << endl;
+        cout << "Base: ";
+        cin >> base;
+    }
 
-        for (int col = -reach; col <= reach; col++)
+    cout << "Seed: ";
+    cin >> seed;
+    cout << endl;
+
+    int middle = n - 1;        // beech wali row/column ka number
+    int last = 2 * n - 2;      // aakhri row/column ka number
+
+    for (int row = 0; row <= last; row++)
+    {
+        for (int col = 0; col <= last; col++)
         {
-            // yeh character beech wale column se kitna door hai
-            int colGap = col;
-            if (colGap < 0)
-                colGap = -colGap;
+            // edge = yeh cell kinaray se kitna andar hai (jaise Question 1 mein)
+            int edge = row;
+            if (col < edge)
+                edge = col;
+            if (last - row < edge)
+                edge = last - row;
+            if (last - col < edge)
+                edge = last - col;
 
-            // beech wale point se kul doori (upar/neeche + left/right)
-            int distance = rowGap + colGap;
+            // kinaray par sabse bari ring, beech mein ring 0
+            int ring = middle - edge;
+            int jump = ringJump(ring, base);
+            int value;
 
-            // characters ka cycle:  *  -  o  .  (phir dobara * se)
-            int turn = distance % 4;
-            if (turn == 0)
-                cout << "*";
-            else if (turn == 1)
-                cout << "-";
-            else if (turn == 2)
-                cout << "o";
+            if (col == edge && row > edge && row < last - edge)
+            {
+                // ring ka left column (corners ke bagair)
+                if (row < middle)
+                    value = seed - jump + 2 * ringJump(middle - row, base);
+                else
+                    value = seed - jump;
+            }
             else
-                cout << ".";
+            {
+                // ring ki upar row, neeche row, right column (aur beech wala number)
+                if (row > middle)
+                    value = seed + jump - 2 * ringJump(row - middle, base);
+                else
+                    value = seed + jump;
+            }
+
+            // minus ya base se bara ho jaye to wapas 0 se base-1 ke andar
+            value = ((value % base) + base) % base;
+
+            if (value < 10)
+                cout << value;
+            else
+                cout << char('A' + value - 10);
+
+            if (col != last)
+                cout << " ";
         }
         cout << endl;
     }
+
     break;}
     case 0: {
         cout << "Exiting program..." << endl;}
