@@ -45,6 +45,65 @@ int ringJump(int ring, int base)
     }
     return total;
 }
+// question 5 ky functions or global variables 
+long long mineRow0 = 0, mineRow1 = 0, mineRow2 = 0, mineRow3 = 0, mineRow4 = 0;
+long long mineRow5 = 0, mineRow6 = 0, mineRow7 = 0, mineRow8 = 0, mineRow9 = 0;
+int mineSize;
+
+long long minePowerOfTen(int times)
+{
+    long long answer = 1;
+    for (int i = 0; i < times; i++)
+    {
+        answer = answer * 10;
+    }
+    return answer;
+}
+long long mineGetRow(int r)
+{
+    if (r == 0) return mineRow0;
+    if (r == 1) return mineRow1;
+    if (r == 2) return mineRow2;
+    if (r == 3) return mineRow3;
+    if (r == 4) return mineRow4;
+    if (r == 5) return mineRow5;
+    if (r == 6) return mineRow6;
+    if (r == 7) return mineRow7;
+    if (r == 8) return mineRow8;
+    return mineRow9;
+}
+void mineSetRow(int r, long long value)
+{
+    if (r == 0) mineRow0 = value;
+    if (r == 1) mineRow1 = value;
+    if (r == 2) mineRow2 = value;
+    if (r == 3) mineRow3 = value;
+    if (r == 4) mineRow4 = value;
+    if (r == 5) mineRow5 = value;
+    if (r == 6) mineRow6 = value;
+    if (r == 7) mineRow7 = value;
+    if (r == 8) mineRow8 = value;
+    if (r == 9) mineRow9 = value;
+}
+int mineGetCell(int r, int c)
+{
+    long long place = minePowerOfTen(mineSize - 1 - c);
+    return (mineGetRow(r) / place) % 10;
+}
+int mineVisit(int r, int c)
+{
+    if (r < 0 || r >= mineSize || c < 0 || c >= mineSize)
+    {
+        return 0;
+    }
+    int cell = mineGetCell(r, c);
+    if (cell == 1 || cell >= 5)
+    {
+        return 0;
+    }
+    mineSetRow(r, mineGetRow(r) + 5 * minePowerOfTen(mineSize - 1 - c));
+    return 1;
+}
 
 
 int main(){
@@ -307,8 +366,65 @@ int main(){
 
     case 5:
     {
-        
+         char symbol;
+    int digit;
+    long long rowValue;
+
+    cin >> mineSize;
+
+    // Mine parhna aur rows mein save karna
+    for (int r = 0; r < mineSize; r++)
+    {
+        rowValue = 0;
+        for (int c = 0; c < mineSize; c++)
+        {
+            cin >> symbol;
+            if (symbol == '.') digit = 0;
+            if (symbol == '*') digit = 1;
+            if (symbol == 'G') digit = 2;
+            if (symbol == 'S') digit = 8;   // S pehle se pohanch wala hai (3 + 5)
+            if (symbol == 'E') digit = 4;
+            rowValue = rowValue * 10 + digit;
+        }
+        mineSetRow(r, rowValue);
     }
+
+    // Jab tak naye cell milte rahein, phailte jao
+    int found = 1;
+    while (found == 1)
+    {
+        found = 0;
+        for (int r = 0; r < mineSize; r++)
+        {
+            for (int c = 0; c < mineSize; c++)
+            {
+                if (mineGetCell(r, c) >= 5)
+                {
+                    if (mineVisit(r - 1, c) == 1) found = 1;   // upar
+                    if (mineVisit(r + 1, c) == 1) found = 1;   // neeche
+                    if (mineVisit(r, c - 1) == 1) found = 1;   // left
+                    if (mineVisit(r, c + 1) == 1) found = 1;   // right
+                }
+            }
+        }
+    }
+
+    // Gold gino aur exit dekho
+    int goldCount = 0;
+    int exitReached = 0;
+    for (int r = 0; r < mineSize; r++)
+    {
+        for (int c = 0; c < mineSize; c++)
+        {
+            if (mineGetCell(r, c) == 7) goldCount++;
+            if (mineGetCell(r, c) == 9) exitReached = 1;
+        }
+    }
+
+    if (exitReached == 1) cout << "Solvable: YES" << endl;
+    else cout << "Solvable: NO" << endl;
+    cout << "Gold reachable: " << goldCount << endl;
+break;}
     case 0: {
         cout << "Exiting program..." << endl;}
     break;
