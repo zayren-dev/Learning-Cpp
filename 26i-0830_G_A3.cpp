@@ -196,6 +196,19 @@ int main(){
         if (column != 0)
         cout << endl;
     break;}
+
+
+    case 3: {
+
+
+
+
+
+
+
+
+        
+    }
     case 0: {
         cout << "Exiting program..." << endl;}
     break;
