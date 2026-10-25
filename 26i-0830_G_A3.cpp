@@ -271,57 +271,39 @@ int main(){
         cout << endl;
         int middle = n - 1;        
         int last = 2 * n - 2;     
-
-    for (int row = 0; row <= last; row++)
-    {
-        for (int col = 0; col <= last; col++)
-        {
-            // edge = yeh cell kinaray se kitna andar hai (jaise Question 1 mein)
-            int edge = row;
-            if (col < edge)
-                edge = col;
-            if (last - row < edge)
-                edge = last - row;
-            if (last - col < edge)
-                edge = last - col;
-
-            // kinaray par sabse bari ring, beech mein ring 0
-            int ring = middle - edge;
-            int jump = ringJump(ring, base);
-            int value;
-
-            if (col == edge && row > edge && row < last - edge)
-            {
-                // ring ka left column (corners ke bagair)
-                if (row < middle)
-                    value = seed - jump + 2 * ringJump(middle - row, base);
+        for (int row = 0; row <= last; row++){
+            for (int col = 0; col <= last; col++){
+                int edge = row;
+                if (col < edge)
+                   edge = col;
+                if (last - row < edge)
+                   edge = last - row;
+                if (last - col < edge)
+                   edge = last - col;
+                int ring = middle - edge;
+                int jump = ringJump(ring, base);
+                int value;
+                if (col == edge && row > edge && row < last - edge){
+                   if (row < middle)
+                       value = seed - jump + 2 * ringJump(middle - row, base);
+                   else
+                       value = seed - jump;}
+                else{
+                   if (row > middle)
+                       value = seed + jump - 2 * ringJump(row - middle, base);
+                   else
+                       value = seed + jump;}
+                value = ((value % base) + base) % base;
+                if (value < 10)
+                   cout << value;
                 else
-                    value = seed - jump;
-            }
-            else
-            {
-                // ring ki upar row, neeche row, right column (aur beech wala number)
-                if (row > middle)
-                    value = seed + jump - 2 * ringJump(row - middle, base);
-                else
-                    value = seed + jump;
-            }
-
-            // minus ya base se bara ho jaye to wapas 0 se base-1 ke andar
-            value = ((value % base) + base) % base;
-
-            if (value < 10)
-                cout << value;
-            else
-                cout << char('A' + value - 10);
-
-            if (col != last)
-                cout << " ";
-        }
-        cout << endl;
-    }
+                   cout << char('A' + value - 10);
+                if (col != last)
+                   cout << " ";}
+        cout << endl;}
 
     break;}
+    
     case 0: {
         cout << "Exiting program..." << endl;}
     break;
