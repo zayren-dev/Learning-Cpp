@@ -3,7 +3,7 @@ using namespace std;
 int main()
 {
     cout << "========================================"<< endl;
-    cout << "Dry Run 1 "<< endl;
+    cout << "Dry Run 01 "<< endl;
     int myvar = 5;
     if(-1){
         cout<< myvar<<endl;
@@ -23,19 +23,19 @@ int main()
 
 
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 2 "<< endl;
+    cout<< "Dry Run 02 "<< endl;
     char ch1 = 'M';
     cout<< ch1 + 4 <<endl;
     cout << static_cast<char>(ch1 + 4)<< endl;
 
 
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 3 "<< endl;
+    cout<< "Dry Run 03 "<< endl;
     char ch2 = 'd';
     cout << ch2 - 'a'<< endl;
 
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 4 "<< endl;
+    cout<< "Dry Run 04 "<< endl;
     int z = 68;
     cout << static_cast<char>(z)<<endl;
     char x = '5';
@@ -44,7 +44,7 @@ int main()
     cout<<n<<endl;
 
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 5 "<< endl;
+    cout<< "Dry Run 05 "<< endl;
     int f = 9;
     int k = 4;
     double s = f / k;
@@ -55,7 +55,7 @@ int main()
     cout << static_cast<char>(ch3 + 4)<<endl;
 
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 6 "<< endl;
+    cout<< "Dry Run 06 "<< endl;
     int e = 19;
     int r = 7;
     double h = e / r;
@@ -64,14 +64,14 @@ int main()
     cout << h << " \n" << g << "\n" << j<<endl;
 
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 7 "<< endl;
+    cout<< "Dry Run 07 "<< endl;
     char c = 'N';
     cout << c + 4 << "\n";
     cout << static_cast<char>(c + 4) << " "<<endl;
     cout << c - 'A'<<endl;
 
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 8 "<< endl;
+    cout<< "Dry Run 08 "<< endl;
     char i = '8';
     int x1 = i - '0';
     double a3 = x1 / 3;
@@ -79,7 +79,7 @@ int main()
     cout << x1 << "\n" << a3 << "\n" << b8<<endl;
    
     cout<< "========================================"<< endl;
-    cout<< "Dry Run 009 "<< endl;
+    cout<< "Dry Run 09 "<< endl;
     char c7 = '5';
     cout << c7 << endl;
     cout << c7 - '0' << endl;
