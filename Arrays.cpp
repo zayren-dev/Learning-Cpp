@@ -7,7 +7,7 @@ using namespace std;
 
 int main() {
 
-    // An array stores multiple values of the same data type
+    
     // Here, we are creating an array that can store 5 integers
     int marks[5];
 
