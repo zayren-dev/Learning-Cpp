@@ -1,4 +1,4 @@
-// Leaning basic creation of arrays here is the syntax of how we create an array
+
 
 // dataType arrayName[size] = {values};
 
