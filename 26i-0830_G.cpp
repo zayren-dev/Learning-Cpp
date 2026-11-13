@@ -287,7 +287,7 @@ int main(){
     int threat = static_cast<int>(recoveredR + penalty + 1.5 * vDouble);
     
     cout << fixed << setprecision(4);
-    cout << "ΔV: " << delta_velocity << endl;
+    cout << "delta V: " << delta_velocity << endl;
     cout << "Telemetry Key K: " << telemetryKey_K << endl;
     cout << "Status Tag: " << first_tag << second_tag << endl;
     cout << "Precision Match Flag: " << exactmatch << endl;
