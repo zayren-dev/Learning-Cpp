@@ -213,6 +213,131 @@ void question3()
     for (int gap = 1; gap <= n - 1; gap++)
         q3PrintRow(n, gap);
 }
+// ques 5 ky liye global variables or oske functions jo wo use kry ga
+long long mazeNumber0 = 0, mazeNumber1 = 0, mazeNumber2 = 0, mazeNumber3 = 0, 
+mazeNumber4 = 0, mazeNumber5 = 0;
+
+long long q5TenPower(int times)
+{
+    long long answer = 1;
+    for (int i = 1; i <= times; i++)
+        answer = answer * 10;
+    return answer;
+}
+
+int q5ReadBox(int boxNumber)
+{
+    int whichNumber = boxNumber / 18;     
+    int position = boxNumber % 18;     
+
+    long long mazeNumber;
+    if (whichNumber == 0)
+        mazeNumber = mazeNumber0;
+    else if (whichNumber == 1)
+        mazeNumber = mazeNumber1;
+    else if (whichNumber == 2)
+        mazeNumber = mazeNumber2;
+    else if (whichNumber == 3)
+        mazeNumber = mazeNumber3;
+    else if (whichNumber == 4)
+        mazeNumber = mazeNumber4;
+    else
+        mazeNumber = mazeNumber5;
+
+    return (mazeNumber / q5TenPower(position)) % 10;
+}
+void q5WriteBox(int boxNumber, int newValue)
+{
+    int whichNumber = boxNumber / 18;
+    int position = boxNumber % 18;
+    long long difference = (newValue - q5ReadBox(boxNumber)) * q5TenPower(position);
+
+    if (whichNumber == 0)
+        mazeNumber0 = mazeNumber0 + difference;
+    else if (whichNumber == 1)
+        mazeNumber1 = mazeNumber1 + difference;
+    else if (whichNumber == 2)
+        mazeNumber2 = mazeNumber2 + difference;
+    else if (whichNumber == 3)
+        mazeNumber3 = mazeNumber3 + difference;
+    else if (whichNumber == 4)
+        mazeNumber4 = mazeNumber4 + difference;
+    else
+        mazeNumber5 = mazeNumber5 + difference;
+}
+
+int q5TryToReach(int boxNumber)
+{
+    int boxValue = q5ReadBox(boxNumber);
+    if (boxValue == 1 || boxValue >= 5)
+        return 0;                          
+    q5WriteBox(boxNumber, boxValue + 5);
+    return 1;
+}
+// ques 5 ka asal code
+void question5()
+{
+    mazeNumber0 = mazeNumber1 = mazeNumber2 = mazeNumber3 = mazeNumber4 = mazeNumber5 = 0; 
+
+    int n;
+    cin >> n;
+    int totalBoxes = n * n;
+
+    for (int boxNumber = 0; boxNumber < totalBoxes; boxNumber++)
+    {
+        char symbol;
+        cin >> symbol;
+        if (symbol == '*')
+            q5WriteBox(boxNumber, 1);
+        else if (symbol == 'G')
+            q5WriteBox(boxNumber, 2);
+        else if (symbol == 'E')
+            q5WriteBox(boxNumber, 3);
+        else if (symbol == 'S')
+            q5WriteBox(boxNumber, 5);      
+        
+    }
+
+   
+    int foundNewBox = 1;
+    while (foundNewBox == 1)
+    {
+        foundNewBox = 0;
+        for (int boxNumber = 0; boxNumber < totalBoxes; boxNumber++)
+        {
+            if (q5ReadBox(boxNumber) >= 5)  
+            {
+                int row = boxNumber / n;
+                int column = boxNumber % n;
+                if (row > 0 && q5TryToReach(boxNumber - n) == 1)
+                    foundNewBox = 1;         // upar wala dabba
+                if (row < n - 1 && q5TryToReach(boxNumber + n) == 1)
+                    foundNewBox = 1;         // neeche wala dabba
+                if (column > 0 && q5TryToReach(boxNumber - 1) == 1)
+                    foundNewBox = 1;         // left wala dabba
+                if (column < n - 1 && q5TryToReach(boxNumber + 1) == 1)
+                    foundNewBox = 1;         // right wala dabba
+            }
+        }
+    }
+
+    int goldCount = 0;
+    int exitReached = 0;
+    for (int boxNumber = 0; boxNumber < totalBoxes; boxNumber++)
+    {
+        int boxValue = q5ReadBox(boxNumber);
+        if (boxValue == 7)
+            goldCount++;
+        if (boxValue == 8)
+            exitReached = 1;
+    }
+
+    if (exitReached == 1)
+        cout << "Solvable: YES" << endl;
+    else
+        cout << "Solvable: NO" << endl;
+    cout << "Gold reachable: " << goldCount << endl;
+}
 
 int main()
 {
