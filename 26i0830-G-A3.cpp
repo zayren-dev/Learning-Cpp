@@ -118,38 +118,26 @@ void question2()
     else
         weekscount = 8;
 
-    int titleLength = weekscount + 1;
+    int h7length = weekscount + 1;
     for (int rest = year; rest > 0; rest = rest / 10)
-        titleLength++;
+        h7length++;
 
     cout << endl << endl;
-    for (int i = 0; i < (20 - titleLength) / 2; i++)
+    for (int i = 0; i < (20 - h7length) / 2; i++)
         cout << " ";
 
-    if (month == 1)
-        cout << "January";
-    else if (month == 2)
-        cout << "February";
-    else if (month == 3)
-        cout << "March";
-    else if (month == 4)
-        cout << "April";
-    else if (month == 5)
-        cout << "May";
-    else if (month == 6)
-        cout << "June";
-    else if (month == 7)
-        cout << "July";
-    else if (month == 8)
-        cout << "August";
-    else if (month == 9)
-        cout << "September";
-    else if (month == 10)
-        cout << "October";
-    else if (month == 11)
-        cout << "November";
-    else
-        cout << "December";
+    if (month == 1) cout << "January";
+    else if (month == 2) cout << "February";
+    else if (month == 3) cout << "March";
+    else if (month == 4) cout << "April";
+    else if (month == 5) cout << "May";
+    else if (month == 6) cout << "June";
+    else if (month == 7) cout << "July";
+    else if (month == 8) cout << "August";
+    else if (month == 9) cout << "September";
+    else if (month == 10) cout << "October";
+    else if (month == 11)  cout << "November";
+    else cout << "December";
 
     cout << " " << year << endl;
     cout << "Su Mo Tu We Th Fr Sa" << endl;
@@ -237,6 +225,10 @@ int main()
     case 1:
         question1();
         break;
+
+    case 2:
+        question2();
+        break;    
 
     case 3:
         question3();
