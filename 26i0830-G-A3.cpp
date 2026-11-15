@@ -31,6 +31,153 @@ void question1()
     }
 }
 
+// ques 2 ky chote mote functions jo use hute ho
+bool q2isleap(int year)
+{
+    if (year % 400 == 0)
+        return true;
+    if (year % 100 == 0)
+        return false;
+    if (year % 4 == 0)
+        return true;
+    return false;
+}
+int q2daysinmonth(int month, int year)
+{
+    if (month == 2)
+    {
+        if (q2isleap(year))
+            return 29;
+        return 28;
+    }
+    if (month == 4 || month == 6 || month == 9 || month == 11)
+        return 30;
+    return 31;
+}
+// question 2 ka asal func jo call huna h neche main mein
+void question2()
+{
+    int year, month;
+
+    cout << "Year::: ";
+    cin >> year;
+    while (year < 1 || year > 9999)
+    {
+        cout << "Year should be between 1 and 9999." << endl;
+        cout << "Year::: ";
+        cin >> year;
+    }
+
+    cout << "Month::: ";
+    cin >> month;
+    while (month < 1 || month > 12)
+    {
+        cout << "Month should be between 1 and 12." << endl;
+        cout << "Month::: ";
+        cin >> month;
+    }
+
+    int startDay = 1;
+
+    for (int y = 1; y < year; y++)
+    {
+        startDay++;
+        if (q2isleap(y))
+            startDay++;
+    }
+
+    for (int m = 1; m < month; m++)
+        startDay = startDay + q2daysinmonth(m, year);
+
+    startDay = startDay % 7;  
+
+    
+    int nameLength;
+    if (month == 1)
+        nameLength = 7;
+    else if (month == 2)
+        nameLength = 8;
+    else if (month == 3)
+        nameLength = 5;
+    else if (month == 4)
+        nameLength = 5;
+    else if (month == 5)
+        nameLength = 3;
+    else if (month == 6)
+        nameLength = 4;
+    else if (month == 7)
+        nameLength = 4;
+    else if (month == 8)
+        nameLength = 6;
+    else if (month == 9)
+        nameLength = 9;
+    else if (month == 10)
+        nameLength = 7;
+    else if (month == 11)
+        nameLength = 8;
+    else
+        nameLength = 8;
+
+    int titleLength = nameLength + 1;
+    for (int rest = year; rest > 0; rest = rest / 10)
+        titleLength++;
+
+    cout << endl << endl;
+    for (int i = 0; i < (20 - titleLength) / 2; i++)
+        cout << " ";
+
+    if (month == 1)
+        cout << "January";
+    else if (month == 2)
+        cout << "February";
+    else if (month == 3)
+        cout << "March";
+    else if (month == 4)
+        cout << "April";
+    else if (month == 5)
+        cout << "May";
+    else if (month == 6)
+        cout << "June";
+    else if (month == 7)
+        cout << "July";
+    else if (month == 8)
+        cout << "August";
+    else if (month == 9)
+        cout << "September";
+    else if (month == 10)
+        cout << "October";
+    else if (month == 11)
+        cout << "November";
+    else
+        cout << "December";
+
+    cout << " " << year << endl;
+    cout << "Su Mo Tu We Th Fr Sa" << endl;
+
+    int totalBoxes = startDay + q2daysinmonth(month, year);
+    for (int box = 0; box < totalBoxes; box++)
+    {
+        int column = box % 7;         
+        if (column != 0)
+            cout << " ";
+
+        if (box < startDay)
+            cout << "  ";             
+        else
+        {
+            int date = box - startDay + 1;
+            if (date < 10)
+                cout << " ";         
+            cout << date;
+        }
+
+        if (column == 6)
+            cout << endl;             
+    }
+    if (totalBoxes % 7 != 0)
+        cout << endl;                 
+}
+
 // ques 3 k chote functions jo use hute hein os mein
 void q3PrintSymbol(int distance)
 {
@@ -92,7 +239,7 @@ int main()
         break;
 
     case 3:
-        question1();
+        question3();
         break;   
         
     case 0:
