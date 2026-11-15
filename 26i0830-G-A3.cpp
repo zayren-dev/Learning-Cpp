@@ -167,7 +167,7 @@ void question2()
 }
 
 // ques 3 k chote functions jo use hute hein os mein
-void q3PrintSymbol(int distance)
+void q3printsymbol(int distance)
 {
     int turn = distance % 4;
     if (turn == 0)
@@ -179,17 +179,17 @@ void q3PrintSymbol(int distance)
     else
         cout << ".";
 }
-void q3PrintRow(int n, int gap)
+void q3printrow(int n, int gap)
 {
    
     for (int space = 0; space < gap; space++)
         cout << " ";
 
     for (int distance = n - 1; distance >= gap; distance--)
-        q3PrintSymbol(distance);
+        q3printsymbol(distance);
 
     for (int distance = gap + 1; distance <= n - 1; distance++)
-        q3PrintSymbol(distance);
+        q3printsymbol(distance);
 
     cout << endl;
 }
@@ -208,10 +208,10 @@ void question3()
     }
 
     for (int gap = n - 1; gap >= 0; gap--)
-        q3PrintRow(n, gap);
+        q3printrow(n, gap);
 
     for (int gap = 1; gap <= n - 1; gap++)
-        q3PrintRow(n, gap);
+        q3printrow(n, gap);
 }
 // ques 4 k help wale functions
 int jumpOf(int ring, int base)
@@ -434,6 +434,283 @@ void question5()
     cout << "Gold reachable: " << goldCount << endl;
 }
 
+// ques 7 ka function or sub functions yahan par hein
+int board[6][7];
+
+// scanBoard ye teeno barhata hai
+bool fourforhuman = false;
+bool fourforcomp = false;
+int grouppoints = 0;
+
+// columns ki tarteeb
+int columnOrder[7] = {3, 2, 4, 1, 5, 0, 6};
+
+// piece column mein girao, jis row mein gira wo wapis do, column full ho to -1
+int dropPiece(int col, int piece)
+{
+    for (int row = 5; row >= 0; row--)
+    {
+        if (board[row][col] == 0)
+        {
+            board[row][col] = piece;
+            return row;
+        }
+    }
+    return -1;
+}
+
+// upar wali row mein koi khali na ho to board full hai
+bool boardIsFull()
+{
+    for (int col = 0; col < 7; col++)
+        if (board[0][col] == 0)
+            return false;
+    return true;
+}
+
+// 4 dabbon ka ek group dekho
+void lookAtFour(int first, int second, int third, int fourth)
+{
+    int cells[4] = {first, second, third, fourth};
+    int computerCells = 0, humanCells = 0, emptyCells = 0;
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (cells[i] == 2)
+            computerCells++;
+        else if (cells[i] == 1)
+            humanCells++;
+        else
+            emptyCells++;
+    }
+
+    if (computerCells == 4)
+        fourforcomp = true;
+    if (humanCells == 4)
+        fourforhuman = true;
+
+    if (computerCells == 3 && emptyCells == 1)
+        grouppoints = grouppoints + 5;
+    else if (computerCells == 2 && emptyCells == 2)
+        grouppoints = grouppoints + 2;
+    else if (humanCells == 3 && emptyCells == 1)
+        grouppoints = grouppoints - 4;
+}
+
+// poore board ke saare groups dekho
+void knowboard()
+{
+    fourforhuman = false;
+    fourforcomp = false;
+    grouppoints = 0;
+
+    // seedhe groups
+    for (int row = 0; row < 6; row++)
+        for (int col = 0; col <= 3; col++)
+            lookAtFour(board[row][col], board[row][col + 1], board[row][col + 2], board[row][col + 3]);
+
+    // neeche ki taraf groups
+    for (int row = 0; row <= 2; row++)
+        for (int col = 0; col < 7; col++)
+            lookAtFour(board[row][col], board[row + 1][col], board[row + 2][col], board[row + 3][col]);
+
+    // neeche-right tirchay groups
+    for (int row = 0; row <= 2; row++)
+        for (int col = 0; col <= 3; col++)
+            lookAtFour(board[row][col], board[row + 1][col + 1], board[row + 2][col + 2], board[row + 3][col + 3]);
+
+    // neeche-left tirchay groups
+    for (int row = 0; row <= 2; row++)
+        for (int col = 3; col < 7; col++)
+            lookAtFour(board[row][col], board[row + 1][col - 1], board[row + 2][col - 2], board[row + 3][col - 3]);
+}
+
+// ply 3: computer ki dobara bari, yahan search ruk jati hai
+int computerSecondMove(int low, int high)
+{
+    int best = -1000000;
+
+    for (int i = 0; i < 7; i++)
+    {
+        int col = columnOrder[i];
+        int row = dropPiece(col, 2);
+        if (row == -1)
+            continue;                       // column full hai
+
+        knowboard();
+        int score;
+        if (fourforcomp)
+            score = 100000;
+        else if (boardIsFull())
+            score = 0;
+        else
+        {
+            score = grouppoints;
+            for (int r = 0; r < 6; r++)
+                if (board[r][3] == 2)
+                    score = score + 3;      // column 3 ka bonus
+        }
+
+        board[row][col] = 0;                // baari wapis
+
+        if (score > best)
+            best = score;
+        if (best > low)
+            low = best;
+        if (low >= high)
+            break;
+    }
+    return best;
+}
+
+// ply 2: human ka jawab, wo computer ke liye sab se bura chunta hai
+int humanReply(int low, int high)
+{
+    int worst = 1000000;
+
+    for (int i = 0; i < 7; i++)
+    {
+        int col = columnOrder[i];
+        int row = dropPiece(col, 1);
+        if (row == -1)
+            continue;
+
+        knowboard();
+        int score;
+        if (fourforhuman)
+            score = -100001;
+        else if (boardIsFull())
+            score = 0;
+        else
+            score = computerSecondMove(low, high);
+
+        board[row][col] = 0;
+
+        if (score < worst)
+            worst = score;
+        if (worst < high)
+            high = worst;
+        if (low >= high)
+            break;
+    }
+    return worst;
+}
+
+int pickComputerColumn()
+{
+    int low = -1000000;
+    int high = 1000000;
+    int best = -1000000;
+    int bestColumn = -1;
+
+    for (int i = 0; i < 7; i++)
+    {
+        int col = columnOrder[i];
+        int row = dropPiece(col, 2);
+        if (row == -1)
+            continue;
+
+        knowboard();
+        int score;
+        if (fourforcomp)
+            score = 100002;
+        else if (boardIsFull())
+            score = 0;
+        else
+            score = humanReply(low, high);
+
+        board[row][col] = 0;
+
+        if (score > best)                
+        {
+            best = score;
+            bestColumn = col;
+        }
+        if (best > low)
+            low = best;
+        if (low >= high)
+            break;
+    }
+    return bestColumn;
+}
+
+void showBoard()
+{
+    cout << endl << "  0 1 2 3 4 5 6" << endl;
+    for (int row = 0; row < 6; row++)
+    {
+        cout << "| ";
+        for (int col = 0; col < 7; col++)
+        {
+            if (board[row][col] == 1)
+                cout << "X ";
+            else if (board[row][col] == 2)
+                cout << "O ";
+            else
+                cout << ". ";
+        }
+        cout << "|" << endl;
+    }
+    cout << "+---------------+" << endl << endl;
+}
+
+bool gameIsOver(int lastPlayer)
+{
+    knowboard();
+    if (lastPlayer == 1 && fourforhuman)
+        cout << "You win!" << endl;
+    else if (lastPlayer == 2 && fourforcomp)
+        cout << "Computer wins!" << endl;
+    else if (boardIsFull())
+        cout << "It's a draw!" << endl;
+    else
+        return false;
+    return true;
+}
+
+void question7()
+{
+    for (int row = 0; row < 6; row++)
+        for (int col = 0; col < 7; col++)
+            board[row][col] = 0;
+    showBoard();
+
+    bool playing = true;
+    while (playing)
+    {
+        int col;
+        int row = -1;
+        while (row == -1)
+        {
+            cout << "Your move (column 0-6): ";
+            cin >> col;
+
+            if (col < 0 || col > 6)
+                cout << "Invalid column! Choose between 0 and 6." << endl;
+            else
+            {
+                row = dropPiece(col, 1);
+                if (row == -1)
+                    cout << "Column " << col << " is full! Choose another column." << endl;
+            }
+        }
+        showBoard();
+
+        if (gameIsOver(1))
+            playing = false;
+        else
+        {
+            // computer ki bari
+            int computerColumn = pickComputerColumn();
+            dropPiece(computerColumn, 2);
+            cout << "Computer plays column " << computerColumn << endl;
+            showBoard();
+
+            if (gameIsOver(2))
+                playing = false;
+        }
+    }
+}
 int main()
 {
     int choice;
@@ -461,7 +738,11 @@ int main()
     case 5:
         question5();
         break;    
-        
+
+    case 7:
+        question7();
+        break;   
+
     case 0:
         cout << "Exiting program..." << endl;
         break;
