@@ -213,6 +213,101 @@ void question3()
     for (int gap = 1; gap <= n - 1; gap++)
         q3PrintRow(n, gap);
 }
+// ques 4 k help wale functions
+int jumpOf(int ring, int base)
+{
+    int last = 0;
+    int beforeLast = 0;
+
+    for (int step = 1; step <= ring; step++)
+    {
+        int next = (last + beforeLast + 1) % base;
+        beforeLast = last;
+        last = next;
+    }
+    return last;
+}
+// ques 4 ka asal function
+void question4()
+{
+    int n, base, seed;
+
+    cout << "N: ";
+    cin >> n;
+    while (n < 1)
+    {
+        cout << "N must be 1 or more." << endl;
+        cout << "N: ";
+        cin >> n;
+    }
+
+    cout << "Base: ";
+    cin >> base;
+    while (base < 2 || base > 16)
+    {
+        cout << "Base must be between 2 and 16." << endl;
+        cout << "Base: ";
+        cin >> base;
+    }
+
+    cout << "Seed: ";
+    cin >> seed;
+    cout << endl;
+
+    seed = seed % base;
+    if (seed < 0)
+        seed = seed + base;
+
+    int middle = n - 1;
+
+    for (int row = 0; row <= 2 * middle; row++)
+    {
+        for (int col = 0; col <= 2 * middle; col++)
+        {
+            int rowGap = row - middle;
+            if (row < middle)
+                rowGap = middle - row;
+
+            int colGap = col - middle;
+            if (col < middle)
+                colGap = middle - col;
+
+            // ring number
+            int ring = rowGap;
+            if (colGap > ring)
+                ring = colGap;
+
+            int shift = jumpOf(ring, base);
+            int value;
+
+            if (col < middle && colGap == ring && rowGap != ring)
+            {
+                value = seed - shift;
+                if (row < middle)
+                    value = value + 2 * jumpOf(rowGap, base);
+            }
+            else
+            {
+                value = seed + shift;
+                if (row > middle)
+                    value = value - 2 * jumpOf(rowGap, base);
+            }
+
+            value = value % base;
+            if (value < 0)
+                value = value + base;
+
+            if (value < 10)
+                cout << value;
+            else
+                cout << char('A' + value - 10);
+
+            if (col < 2 * middle)
+                cout << " ";
+        }
+        cout << endl;
+    }
+}
 // ques 5 ky liye global variables or oske functions jo wo use kry ga
 long long mazeNumber0 = 0, mazeNumber1 = 0, mazeNumber2 = 0, mazeNumber3 = 0, 
 mazeNumber4 = 0, mazeNumber5 = 0;
@@ -358,6 +453,14 @@ int main()
     case 3:
         question3();
         break;   
+
+    case 4:
+        question4();
+        break;
+
+    case 5:
+        question5();
+        break;    
         
     case 0:
         cout << "Exiting program..." << endl;
