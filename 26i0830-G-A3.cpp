@@ -77,48 +77,48 @@ void question2()
         cin >> month;
     }
 
-    int startDay = 1;
+    int daystart = 1;
 
     for (int y = 1; y < year; y++)
     {
-        startDay++;
+        daystart++;
         if (q2isleap(y))
-            startDay++;
+            daystart++;
     }
 
     for (int m = 1; m < month; m++)
-        startDay = startDay + q2daysinmonth(m, year);
-
-    startDay = startDay % 7;  
+        daystart = daystart + q2daysinmonth(m, year);
+ 
+    daystart = daystart % 7;  
 
     
-    int nameLength;
+    int weekscount;
     if (month == 1)
-        nameLength = 7;
+        weekscount = 7;
     else if (month == 2)
-        nameLength = 8;
+        weekscount = 8;
     else if (month == 3)
-        nameLength = 5;
+        weekscount = 5;
     else if (month == 4)
-        nameLength = 5;
+        weekscount = 5;
     else if (month == 5)
-        nameLength = 3;
+        weekscount = 3;
     else if (month == 6)
-        nameLength = 4;
+        weekscount = 4;
     else if (month == 7)
-        nameLength = 4;
+        weekscount = 4;
     else if (month == 8)
-        nameLength = 6;
+        weekscount = 6;
     else if (month == 9)
-        nameLength = 9;
+        weekscount = 9;
     else if (month == 10)
-        nameLength = 7;
+        weekscount = 7;
     else if (month == 11)
-        nameLength = 8;
+        weekscount = 8;
     else
-        nameLength = 8;
+        weekscount = 8;
 
-    int titleLength = nameLength + 1;
+    int titleLength = weekscount + 1;
     for (int rest = year; rest > 0; rest = rest / 10)
         titleLength++;
 
@@ -154,18 +154,18 @@ void question2()
     cout << " " << year << endl;
     cout << "Su Mo Tu We Th Fr Sa" << endl;
 
-    int totalBoxes = startDay + q2daysinmonth(month, year);
+    int totalBoxes = daystart + q2daysinmonth(month, year);
     for (int box = 0; box < totalBoxes; box++)
     {
         int column = box % 7;         
         if (column != 0)
             cout << " ";
 
-        if (box < startDay)
+        if (box < daystart)
             cout << "  ";             
         else
         {
-            int date = box - startDay + 1;
+            int date = box - daystart + 1;
             if (date < 10)
                 cout << " ";         
             cout << date;
